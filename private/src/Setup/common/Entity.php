@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Model Manager
+ * Entity Manager
  *
- * @category  	src\Demo
- * @package   	src\Demo\common
+ * @category  	src\Setup
+ * @package   	src\Setup\common
  * @author    	Judicaël Paquet <judicael.paquet@gmail.com>
  * @copyright 	Copyright (c) 2013-2014 PAQUET Judicaël FR Inc. (https://github.com/las93)
  * @license   	https://github.com/las93/venus/blob/master/LICENSE.md Tout droit réservé à PAQUET Judicaël
@@ -14,15 +14,15 @@
  * @since     	1.0
  */
 
-namespace Venus\src\Demo\common;
+namespace Venus\src\Setup\common;
 
-use \Venus\core\Model as CoreModel;
+use \Venus\core\Entity as CoreEntity;
 
 /**
- * Model Manager
+ * Entity Manager
  *
- * @category  	src\Demo
- * @package   	src\Demo\common
+ * @category  	src\Setup
+ * @package   	src\Setup\common
  * @author    	Judicaël Paquet <judicael.paquet@gmail.com>
  * @copyright 	Copyright (c) 2013-2014 PAQUET Judicaël FR Inc. (https://github.com/las93)
  * @license   	https://github.com/las93/venus/blob/master/LICENSE.md Tout droit réservé à PAQUET Judicaël
@@ -32,7 +32,7 @@ use \Venus\core\Model as CoreModel;
  * @since     	1.0
  */
 
-abstract class Model extends CoreModel {
+abstract class Entity extends CoreEntity {
 
 	/**
 	 * Constructor

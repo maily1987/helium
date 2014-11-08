@@ -15,7 +15,7 @@
 error_reporting(E_ALL);
 ini_set('display_error', 1);
 
-const PORTAIL = 'Demo';
+const PORTAIL = 'Setup';
 
 set_include_path(get_include_path().PATH_SEPARATOR.str_replace('public'.DIRECTORY_SEPARATOR.PORTAIL, 'private', __DIR__));
 
