@@ -4,7 +4,7 @@
  * Controller to install Helium on your hardware
  *
  * @category  	src
- * @package   	src\Setup\Controller
+ * @package   	src\Helium\Controller
  * @author    	Judicaël Paquet <judicael.paquet@gmail.com>
  * @copyright 	Copyright (c) 2013-2014 PAQUET Judicaël FR Inc. (https://github.com/las93)
  * @license   	https://github.com/las93/venus/blob/master/LICENSE.md Tout droit réservé à PAQUET Judicaël
@@ -14,18 +14,18 @@
  * @since     	1.0
  */
 
-namespace Venus\src\Setup\Controller;
+namespace Venus\src\Helium\Controller;
 
-use \Venus\src\Setup\common\Controller as Controller;
+use \Venus\src\Helium\common\Controller as Controller;
 use \Venus\lib\Session as Session;
-use \Venus\src\Setup\Model\user as modelUser;
-use \Venus\src\Setup\Entity\user as entityUser;
+use \Venus\src\Helium\Model\user as modelUser;
+use \Venus\src\Helium\Entity\user as entityUser;
 
 /**
  * Controller to install Helium on your hardware
  *
  * @category  	src
- * @package   	src\Setup\Controller
+ * @package   	src\Helium\Controller
  * @author    	Judicaël Paquet <judicael.paquet@gmail.com>
  * @copyright 	Copyright (c) 2013-2014 PAQUET Judicaël FR Inc. (https://github.com/las93)
  * @license   	https://github.com/las93/venus/blob/master/LICENSE.md Tout droit réservé à PAQUET Judicaël
@@ -35,7 +35,7 @@ use \Venus\src\Setup\Entity\user as entityUser;
  * @since     	1.0
  */
 
-class Setup extends Controller {
+class Helium extends Controller {
 
 	/**
 	 * Constructor
@@ -98,7 +98,7 @@ class Setup extends Controller {
 		}
 		
 		$this->layout
-			 ->assign('setup', $aVerification)
+			 ->assign('Helium', $aVerification)
 			 ->display();
 	}
 
@@ -112,8 +112,8 @@ class Setup extends Controller {
 	public function configuration() {
 
 		$this->layout
-			 ->assign('model', '/src/Setup/View/Configuration.tpl')
-			 ->assign('setup', $aVerification)
+			 ->assign('model', '/src/Helium/View/Configuration.tpl')
+			 ->assign('Helium', $aVerification)
 			 ->display();
 	}
 
@@ -149,7 +149,7 @@ class Setup extends Controller {
 		}
 
 		$this->layout
-			 ->assign('model', '/src/Setup/View/Save.tpl')
+			 ->assign('model', '/src/Helium/View/Save.tpl')
 			 ->display();
 	}
 }
