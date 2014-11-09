@@ -61,15 +61,39 @@ class Setup extends Controller {
 		$aVerification = array();
 		$aVerification['count_error'] = 0;
 
-		if (is_writable('../../private/conf/Db.conf') === true) { 
+		if (is_writable('../../private/src/Setup/conf/Db.conf') === true) { 
 			
 			$aVerification['db_conf']['img'] = 'green'; 
-			$aVerification['db_conf']['text'] = 'Db.conf is writable !'; 
+			$aVerification['db_conf']['text'] = 'Db.conf is writable!'; 
 		}
 		else { 
 			
 			$aVerification['db_conf']['img'] = 'red'; 
-			$aVerification['db_conf']['text'] = 'file /private/conf/Db.conf must have write permission!'; 
+			$aVerification['db_conf']['text'] = 'file /private/src/Setup/conf/Db.conf must have write permission!'; 
+			$aVerification['count_error']++;
+		}
+		
+		if (class_exists('PDO')) {
+			
+			$aVerification['pdo']['img'] = 'green'; 
+			$aVerification['pdo']['text'] = 'PDO is activated!'; 
+		}
+		else { 
+			
+			$aVerification['pdo']['img'] = 'red'; 
+			$aVerification['pdo']['text'] = 'PDO must be activated!'; 
+			$aVerification['count_error']++;
+		}
+		
+		if (function_exists('mysql_connect')) {
+			
+			$aVerification['mysql']['img'] = 'green'; 
+			$aVerification['mysql']['text'] = 'Mysql library is activated!'; 
+		}
+		else { 
+			
+			$aVerification['mysql']['img'] = 'red'; 
+			$aVerification['mysql']['text'] = 'Mysql library must be activated!'; 
 			$aVerification['count_error']++;
 		}
 		
@@ -102,14 +126,22 @@ class Setup extends Controller {
 
 	public function save() {
 
-		if (is_writable('../../private/conf/Db.conf') === true) {
+		if (is_writable('../../private/src/Setup/conf/Db.conf') === true) {
 				
-			$sFileConf = file_get_contents('../../private/conf/Db.conf');
+			$sFileConf = file_get_contents('../../private/src/Setup/conf/Db.conf');
 			$sFileConf = preg_replace('/"host": "localhost",/', '"host": "'.$_POST['host'].'",', $sFileConf);
 			$sFileConf = preg_replace('/"db": "helium",/', '"db": "'.$_POST['name'].'",', $sFileConf);
 			$sFileConf = preg_replace('/"user": "root",/', '"user": "'.$_POST['login'].'",', $sFileConf);
 			$sFileConf = preg_replace('/"password": "test",/', '"password": "'.$_POST['password'].'",', $sFileConf);
-			file_put_contents('../../private/conf/Db.conf', $sFileConf);
+			file_put_contents('../../private/Setup/conf/Db.conf', $sFileConf);
+			
+			$aOptions = array('p' => 'Setup', 'r' => 'yes', 'c' => true);
+
+			$oPdo = new \PDO('mysql:host='.$_POST['localhost'], $_POST['login'], $_POST['password'], array());
+			$oPdo->query('CREATE DATABASE IF NOT EXISTS '.$_POST['name']);
+			
+			$oEntity = new \Venus\src\Batch\Controller\Entity;
+			$oEntity->runScaffolding($aOptions);
 		}
 		else {
 			
@@ -117,7 +149,7 @@ class Setup extends Controller {
 		}
 
 		$this->layout
-			 ->assign('model', '/src/Setup/View/Configuration.tpl')
+			 ->assign('model', '/src/src/Setup/View/Configuration.tpl')
 			 ->assign('setup', $aVerification)
 			 ->display();
 	}
