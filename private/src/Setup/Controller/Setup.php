@@ -7,9 +7,9 @@
  * @package   	src\Setup\Controller
  * @author    	Judicaël Paquet <judicael.paquet@gmail.com>
  * @copyright 	Copyright (c) 2013-2014 PAQUET Judicaël FR Inc. (https://github.com/las93)
- * @license   	https://github.com/las93/venus/blob/master/LICENSE.md Tout droit réservé à PAQUET Judicaël
+ * @license   	https://github.com/las93/helium/LICENSE.md Tout droit réservé à PAQUET Judicaël
  * @version   	Release: 1.0.0
- * @filesource	https://github.com/las93/venus
+ * @filesource	https://github.com/las93/helium
  * @link      	https://github.com/las93
  * @since     	1.0
  */
@@ -17,9 +17,6 @@
 namespace Venus\src\Setup\Controller;
 
 use \Venus\src\Setup\common\Controller as Controller;
-use \Venus\lib\Session as Session;
-use \Venus\src\Setup\Model\user as modelUser;
-use \Venus\src\Setup\Entity\user as entityUser;
 
 /**
  * Controller to install Helium on your hardware
@@ -28,9 +25,9 @@ use \Venus\src\Setup\Entity\user as entityUser;
  * @package   	src\Setup\Controller
  * @author    	Judicaël Paquet <judicael.paquet@gmail.com>
  * @copyright 	Copyright (c) 2013-2014 PAQUET Judicaël FR Inc. (https://github.com/las93)
- * @license   	https://github.com/las93/venus/blob/master/LICENSE.md Tout droit réservé à PAQUET Judicaël
+ * @license   	https://github.com/las93/helium/LICENSE.md Tout droit réservé à PAQUET Judicaël
  * @version   	Release: 1.0.0
- * @filesource	https://github.com/las93/venus
+ * @filesource	https://github.com/las93/helium
  * @link      	https://github.com/las93
  * @since     	1.0
  */

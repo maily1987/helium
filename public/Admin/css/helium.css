@@ -1,0 +1,32 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+@media screen and (max-width: 640px) {
+  #logo_helium {
+    height:30px;
+  }
+}
+
+.block_option {
+	float: left;
+	position: relative;	
+	text-align:center;
+	margin:20px;
+}
+
+.block_option_img {
+	float: left;
+	vertical-align:middle;
+	position: relative;	
+	text-align:center;
+	margin:0px;	
+	width:64px;	
+	height:64px;
+}
+
+label {
+	width:200px;	
+}

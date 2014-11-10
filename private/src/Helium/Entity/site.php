@@ -1,114 +1,114 @@
 <?php
-
-/**
- * Entity to site
- *
- * @category  	src
- * @package   	src\Helium\Entity
- * @author    	Judicaël Paquet <judicael.paquet@gmail.com>
- * @copyright 	Copyright (c) 2013-2014 Judicaël Paquet (https://github.com/las93)
- * @license   	https://github.com/las93/venus/blob/master/LICENSE.md Tout droit réservé à Judicaël Paquet
- * @version   	Release: 1.0.0
- * @filesource	https://github.com/las93/venus
- * @link      	https://github.com/las93
- * @since     	1.0
- */
-
-namespace Venus\src\Helium\Entity;
-
-use \Venus\core\Entity as Entity;
-use \Venus\lib\Orm as Orm;
-
-/**
- * Entity to site
- *
- * @category  	src
- * @package   	src\Helium\Entity
- * @author    	Judicaël Paquet <judicael.paquet@gmail.com>
- * @copyright 	Copyright (c) 2013-2014 Judicaël Paquet (https://github.com/las93)
- * @license   	https://github.com/las93/venus/blob/master/LICENSE.md Tout droit réservé à Judicaël Paquet
- * @version   	Release: 1.0.0
- * @filesource	https://github.com/las93/venus
- * @link      	https://github.com/las93
- * @since     	1.0
- */
-
-class site extends Entity {
-
+	
 	/**
-	 * id
+	 * Entity to site
 	 *
-	 * @access private
-	 * @var    int
-	 *
-	 * @primary_key
+	 * @category  	src
+	 * @package   	src\Helium\Entity
+	 * @author    	Judicaël Paquet <judicael.paquet@gmail.com>
+	 * @copyright 	Copyright (c) 2013-2014 Judicaël Paquet (https://github.com/las93)
+	 * @license   	https://github.com/las93/helium/LICENSE.md Tout droit réservé à Judicaël Paquet
+	 * @version   	Release: 1.0.0
+	 * @filesource	https://github.com/las93/helium
+	 * @link      	https://github.com/las93
+	 * @since     	1.0
 	 */
-
-	private $id = null;
-
-
-
+	
+	namespace Venus\src\Helium\Entity;
+	
+	use \Venus\core\Entity as Entity;
+	use \Venus\lib\Orm as Orm;
+	
 	/**
-	 * name
+	 * Entity to site
 	 *
-	 * @access private
-	 * @var    string
-	 *
+	 * @category  	src
+	 * @package   	src\Helium\Entity
+	 * @author    	Judicaël Paquet <judicael.paquet@gmail.com>
+	 * @copyright 	Copyright (c) 2013-2014 Judicaël Paquet (https://github.com/las93)
+	 * @license   	https://github.com/las93/helium/LICENSE.md Tout droit réservé à Judicaël Paquet
+	 * @version   	Release: 1.0.0
+	 * @filesource	https://github.com/las93/helium
+	 * @link      	https://github.com/las93
+	 * @since     	1.0
 	 */
+	
+	class site extends Entity {
 
-	private $name = null;
-
-
-
-	/**
-	 * get id of site
-	 *
-	 * @access public
-	 * @return int
+		/**
+		 * id
+		 *
+		 * @access private
+		 * @var    int
+		 *
+		 * @primary_key
 	 */
-
-	public function get_id() {
-
-		return $this->id;
+	
+		private $id = null;
+	
+	
+	
+		/**
+		 * name
+		 *
+		 * @access private
+		 * @var    string
+		 *
+		 */
+	
+		private $name = null;
+	
+	
+	
+		/**
+		 * get id of site
+		 *
+		 * @access public
+		 * @return int
+		 */
+	
+		public function get_id() {
+	
+			return $this->id;
+		}
+	
+		/**
+		 * set id of site
+		 *
+		 * @access public
+		 * @param  int $id id of site
+		 * @return \Venus\src\Helium\Entity\site
+		 */
+	
+		public function set_id($id) {
+	
+			$this->id = $id;
+			return $this;
+		}
+	
+		/**
+		 * get name of site
+		 *
+		 * @access public
+		 * @return string
+		 */
+	
+		public function get_name() {
+	
+			return $this->name;
+		}
+	
+		/**
+		 * set name of site
+		 *
+		 * @access public
+		 * @param  string $name name of site
+		 * @return \Venus\src\Helium\Entity\site
+		 */
+	
+		public function set_name($name) {
+	
+			$this->name = $name;
+			return $this;
+		}
 	}
-
-	/**
-	 * set id of site
-	 *
-	 * @access public
-	 * @param  int $id id of site
-	 * @return \Venus\src\Helium\Entity\site
-	 */
-
-	public function set_id($id) {
-
-		$this->id = $id;
-		return $this;
-	}
-
-	/**
-	 * get name of site
-	 *
-	 * @access public
-	 * @return string
-	 */
-
-	public function get_name() {
-
-		return $this->name;
-	}
-
-	/**
-	 * set name of site
-	 *
-	 * @access public
-	 * @param  string $name name of site
-	 * @return \Venus\src\Helium\Entity\site
-	 */
-
-	public function set_name($name) {
-
-		$this->name = $name;
-		return $this;
-	}
-}
