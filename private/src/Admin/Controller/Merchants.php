@@ -49,16 +49,14 @@ class Merchants extends Controller {
 	}
 
 	/**
-	 * the home page of the Site
+	 * The page of the merchant manager (list)
 	 *
 	 * @access public
 	 * @return void
 	 */
 
 	public function index() {
-
-		
-		
+	
 		if (isset($_GET) && isset($_GET['remove'])) {
 
 			$oMerchant = new Merchant;
@@ -75,7 +73,7 @@ class Merchants extends Controller {
 	}
 
 	/**
-	 * the home page of the Site
+	 * The page of the merchant manager (add)
 	 *
 	 * @access public
 	 * @return void
@@ -116,7 +114,7 @@ class Merchants extends Controller {
 	}
 
 	/**
-	 * the home page of the Site
+	 * The page of the merchant manager (update)
 	 *
 	 * @access public
 	 * @return void
