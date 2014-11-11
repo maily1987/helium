@@ -97,18 +97,6 @@
 	
 	
 		/**
-		 * offer_type
-		 *
-		 * @access private
-		 * @var    string
-		 *
-		 */
-	
-		private $offer_type = null;
-	
-	
-	
-		/**
 		 * date_create
 		 *
 		 * @access private
@@ -319,32 +307,6 @@
 		public function set_enable($enable) {
 	
 			$this->enable = $enable;
-			return $this;
-		}
-	
-		/**
-		 * get offer_type of offer
-		 *
-		 * @access public
-		 * @return string
-		 */
-	
-		public function get_offer_type() {
-	
-			return $this->offer_type;
-		}
-	
-		/**
-		 * set offer_type of offer
-		 *
-		 * @access public
-		 * @param  string $offer_type offer_type of offer
-		 * @return \Venus\src\Helium\Entity\offer
-		 */
-	
-		public function set_offer_type($offer_type) {
-	
-			$this->offer_type = $offer_type;
 			return $this;
 		}
 	

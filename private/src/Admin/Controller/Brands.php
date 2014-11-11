@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Controller to Products
+ * Controller to Brands
  *
  * @category  	src
  * @package   	src\Admin\Controller
@@ -17,10 +17,10 @@
 namespace Venus\src\Admin\Controller;
 
 use \Venus\src\Admin\common\Controller as Controller;
-use \Venus\src\Helium\Model\product as Product;
+use \Venus\src\Helium\Model\brand as Brand;
 
 /**
- * Controller to Products
+ * Controller to Brands
  *
  * @category  	src
  * @package   	src\Admin\Controller
@@ -33,7 +33,7 @@ use \Venus\src\Helium\Model\product as Product;
  * @since     	1.0
  */
 
-class Products extends Controller {
+class Brands extends Controller {
 
 	/**
 	 * Constructor
@@ -48,7 +48,7 @@ class Products extends Controller {
 	}
 
 	/**
-	 * The page of the product manager (list)
+	 * The page of the brands manager (list)
 	 *
 	 * @access public
 	 * @return void
@@ -58,21 +58,21 @@ class Products extends Controller {
 
 		if (isset($_GET) && isset($_GET['remove'])) {
 
-			$oProduct = new Product;
-			$oProductEntity = $oProduct->findOneByid($_GET['remove']);
-			$oProductEntity->remove();
+			$oBrand = new Brand;
+			$oBrandEntity = $oBrand->findOneByid($_GET['remove']);
+			$oBrandEntity->remove();
 		}
 		
-		$oProduct = new Product;
-		$aProducts = $oProduct->findAll();
+		$oBrand = new Brand;
+		$aBrands = $oBrand->findAll();
 		
 		$this->layout
-			 ->assign('products', $aProducts)
+			 ->assign('brands', $aBrands)
 			 ->display();
 	}
 
 	/**
-	 * The page of the product manager (add)
+	 * The page of the brands manager (add)
 	 *
 	 * @access public
 	 * @return void
@@ -82,24 +82,19 @@ class Products extends Controller {
 		
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')
-					  ->add('short_description', 'textarea', 'Description')
-					  ->add('description', 'textarea', 'Description')
-					  ->add('ean13', 'text', 'Ean13')
-					  ->add('reference', 'text', 'Reference')
-					  ->add('market_price', 'text', 'Market price')
 					  ->add('validate', 'submit')
-					  ->synchronizeEntity('Venus\src\Helium\Entity\product')
+					  ->synchronizeEntity('Venus\src\Helium\Entity\brand')
 					  ->getForm();
 
 		$this->layout
 			 ->assign('form', $sForm)
-			 ->assign('model', '/src/Admin/View/ProductsAdd.tpl')
+			 ->assign('model', '/src/Admin/View/BrandsAdd.tpl')
 			 ->display();
 	}
 
 	/**
-	 * The page of the product manager (update)
-	 *
+	 * The page of the brands manager (update)
+	 * 
 	 * @access public
 	 * @return void
 	 */
@@ -108,18 +103,13 @@ class Products extends Controller {
 		
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')
-					  ->add('short_description', 'textarea', 'Description')
-					  ->add('description', 'textarea', 'Description')
-					  ->add('ean13', 'text', 'Ean13')
-					  ->add('reference', 'text', 'Reference')
-					  ->add('market_price', 'text', 'Market price')
 					  ->add('validate', 'submit')
-					  ->synchronizeEntity('Venus\src\Helium\Entity\product', $_GET['update'])
+					  ->synchronizeEntity('Venus\src\Helium\Entity\brand', $_GET['update'])
 					  ->getForm();
 
 		$this->layout
 			 ->assign('form', $sForm)
-			 ->assign('model', '/src/Admin/View/ProductsAdd.tpl')
+			 ->assign('model', '/src/Admin/View/BrandsAdd.tpl')
 			 ->display();
 	}
 }
