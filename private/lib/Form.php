@@ -39,6 +39,8 @@
 namespace Venus\lib;
 
 use \Venus\lib\Entity as LibEntity;
+use \Venus\lib\Form\Checkbox as Checkbox;
+use \Venus\lib\Form\Label as Label;
 use \Venus\lib\Form\Input as Input;
 use \Venus\lib\Form\Select as Select;
 use \Venus\lib\Form\Textarea as Textarea;
@@ -107,10 +109,19 @@ class Form {
 	 * The id of entity
 	 *
 	 *  @access private
-	 *  @var    string
+	 *  @var    int
 	 */
 
-	private $_sIdEntity = null;
+	private $_iIdEntity = null;
+
+	/**
+	 * The entity to save with the formular
+	 *
+	 *  @access private
+	 *  @var    int
+	 */
+
+	private $_iIdEntityCreated = null;
 
 	/**
 	 * constructor that it increment (static) for all use
@@ -132,19 +143,39 @@ class Form {
 	 * @param  string $sName name
 	 * @param  string $sType type of field
 	 * @param  string $sLabel label of field
-	 * @param  string $sValue value of field
+	 * @param  mixed $mValue value of field
+	 * @parma  mixed $mOptions options (for select)
 	 * @return \Venus\lib\Form
 	 */
 
-	public function add($sName, $sType, $sLabel = null, $sValue = null) {
+	public function add($sName, $sType, $sLabel = null, $mValue = null, $mOptions = null) {
 
 		if ($sType === 'text' || $sType === 'submit' || $sType === 'password') {
 
-			$this->_aElement[$sName] = new Input($sName, $sType, $sLabel, $sValue);
+			$this->_aElement[$sName] = new Input($sName, $sType, $sLabel, $mValue);
 		}
 		elseif ($sType === 'textarea') {
 
-			$this->_aElement[$sName] = new Textarea($sName, $sLabel, $sValue);
+			$this->_aElement[$sName] = new Textarea($sName, $sLabel, $mValue);
+		}
+		else  if ($sType === 'select') {
+
+			$this->_aElement[$sName] = new Select($sName, $mOptions, $sLabel, $mValue);
+		}
+		else  if ($sType === 'label') {
+
+			$this->_aElement[$sName] = new Label($sName);
+		}
+		else  if ($sType === 'list_checkbox') {
+
+			$i = 0;
+			
+			$this->_aElement[$sName.'_'.$i++] = new Label($sLabel);
+			
+			foreach ($mValue as $mKey => $sValue) {
+			
+				$this->_aElement[$sName.'_'.$i++] = new Checkbox($sName, $sValue, $mKey, $mOptions);
+			}
 		}
 		else  if ($sType === 'date') {
 
@@ -189,6 +220,18 @@ class Form {
 	}
 
 	/**
+	 * get id entity created by the formular
+	 *
+	 * @access public
+	 * @return int
+	 */
+
+	public function getIdEntityCreated() {
+		
+		return $this->_iIdEntityCreated;
+	}
+
+	/**
 	 * get global form
 	 *
 	 * @access public
@@ -197,7 +240,7 @@ class Form {
 
 	public function getForm() {
 
-		if ($this->_sIdEntity > 0 && $this->_sSynchronizeEntity !== null && count($_POST) > 0) {
+		if ($this->_iIdEntity > 0 && $this->_sSynchronizeEntity !== null && count($_POST) > 0) {
 
 			$sModelName = str_replace('Entity', 'Model', $this->_sSynchronizeEntity);
 			$oModel = new $sModelName;
@@ -206,7 +249,7 @@ class Form {
 			$sPrimaryKey = LibEntity::getPrimaryKeyNameWithoutMapping($oEntity);
 			$sMethodName = 'set_'.$sPrimaryKey;
 
-			call_user_func_array(array(&$oEntity, $sMethodName), array($this->_sIdEntity));
+			call_user_func_array(array(&$oEntity, $sMethodName), array($this->_iIdEntity));
 
 			foreach ($this->_aElement as $sKey => $sValue) {
 			
@@ -226,9 +269,9 @@ class Form {
 				call_user_func_array(array(&$oEntity, $sMethodName), array($_POST[$sValue->getName()]));
 			}
 			
-			$oEntity->save();
+			$this->_iIdEntityCreated = $oEntity->save();
 		}
-		else if ($this->_sIdEntity > 0 && $this->_sSynchronizeEntity !== null && count($_POST) < 1) {
+		else if ($this->_iIdEntity > 0 && $this->_sSynchronizeEntity !== null && count($_POST) < 1) {
 
 			$sModelName = str_replace('Entity', 'Model', $this->_sSynchronizeEntity);
 			$oModel = new $sModelName;
@@ -236,7 +279,7 @@ class Form {
 			$oEntity = new $this->_sSynchronizeEntity;
 			$sPrimaryKey = LibEntity::getPrimaryKeyNameWithoutMapping($oEntity);
 			$sMethodName = 'findOneBy'.$sPrimaryKey;
-			$oCompleteEntity = call_user_func_array(array(&$oModel, $sMethodName), array($this->_sIdEntity));
+			$oCompleteEntity = call_user_func_array(array(&$oModel, $sMethodName), array($this->_iIdEntity));
 
 			foreach ($this->_aElement as $sKey => $sValue) {
 
@@ -322,7 +365,7 @@ class Form {
 
 	public function synchronizeEntity($sSynchronizeEntity, $iId = null) {
 
-		if ($iId !== null) { $this->_sIdEntity = $iId; }
+		if ($iId !== null) { $this->_iIdEntity = $iId; }
 			
 		$this->_sSynchronizeEntity = $sSynchronizeEntity;
 		return $this;

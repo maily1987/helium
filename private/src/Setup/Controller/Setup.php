@@ -16,6 +16,8 @@
 
 namespace Venus\src\Setup\Controller;
 
+use \Venus\src\Helium\Entity\right as Right;
+use \Venus\src\Helium\Entity\user as User;
 use \Venus\src\Setup\common\Controller as Controller;
 
 /**
@@ -130,15 +132,33 @@ class Setup extends Controller {
 			$sFileConf = preg_replace('/"db": "helium",/', '"db": "'.$_POST['name'].'",', $sFileConf);
 			$sFileConf = preg_replace('/"user": "root",/', '"user": "'.$_POST['login'].'",', $sFileConf);
 			$sFileConf = preg_replace('/"password": "test",/', '"password": "'.$_POST['password'].'",', $sFileConf);
-			file_put_contents('../../private/Helium/conf/Db.conf', $sFileConf);
+			file_put_contents('../../private/src/Helium/conf/Db.conf', $sFileConf);
 			
 			$aOptions = array('p' => 'Helium', 'r' => 'yes', 'c' => true);
 
-			$oPdo = new \PDO('mysql:host='.$_POST['localhost'], $_POST['login'], $_POST['password'], array());
+			$oPdo = new \PDO('mysql:host='.$_POST['host'], $_POST['login'], $_POST['password'], array());
 			$oPdo->query('CREATE DATABASE IF NOT EXISTS '.$_POST['name']);
 			
 			$oEntity = new \Venus\src\Batch\Controller\Entity;
 			$oEntity->runScaffolding($aOptions);
+			
+			$oUser = new User;
+			
+			$oUser->set_name('admin')
+				  ->set_password(md5('admin'))
+				  ->save();
+			
+			$oRight = new Right;
+			
+			$oRight->set_name('Access Setup')
+				   ->set_description('Give access at the user at the Setup Manager')
+				   ->save();
+			
+			$oRight = new Right;
+			
+			$oRight->set_name('Access Merchant')
+				   ->set_description('Give access at the user at the Merchant Manager')
+				   ->save();
 		}
 		else {
 			

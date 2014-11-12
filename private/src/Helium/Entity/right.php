@@ -1,7 +1,7 @@
 <?php
 	
 	/**
-	 * Entity to user
+	 * Entity to right
 	 *
 	 * @category  	src
 	 * @package   	src\Helium\Entity
@@ -20,7 +20,7 @@
 	use \Venus\lib\Orm as Orm;
 	
 	/**
-	 * Entity to user
+	 * Entity to right
 	 *
 	 * @category  	src
 	 * @package   	src\Helium\Entity
@@ -33,7 +33,7 @@
 	 * @since     	1.0
 	 */
 	
-	class user extends Entity {
+	class right extends Entity {
 
 		/**
 		 * id
@@ -61,43 +61,19 @@
 	
 	
 		/**
-		 * firstname
+		 * description
 		 *
 		 * @access private
 		 * @var    string
 		 *
 		 */
 	
-		private $firstname = null;
+		private $description = null;
 	
 	
 	
 		/**
-		 * email
-		 *
-		 * @access private
-		 * @var    string
-		 *
-		 */
-	
-		private $email = null;
-	
-	
-	
-		/**
-		 * password
-		 *
-		 * @access private
-		 * @var    string
-		 *
-		 */
-	
-		private $password = null;
-	
-	
-	
-		/**
-		 * get id of user
+		 * get id of right
 		 *
 		 * @access public
 		 * @return int
@@ -109,11 +85,11 @@
 		}
 	
 		/**
-		 * set id of user
+		 * set id of right
 		 *
 		 * @access public
-		 * @param  int $id id of user
-		 * @return \Venus\src\Helium\Entity\user
+		 * @param  int $id id of right
+		 * @return \Venus\src\Helium\Entity\right
 		 */
 	
 		public function set_id($id) {
@@ -123,7 +99,7 @@
 		}
 	
 		/**
-		 * get name of user
+		 * get name of right
 		 *
 		 * @access public
 		 * @return string
@@ -135,11 +111,11 @@
 		}
 	
 		/**
-		 * set name of user
+		 * set name of right
 		 *
 		 * @access public
-		 * @param  string $name name of user
-		 * @return \Venus\src\Helium\Entity\user
+		 * @param  string $name name of right
+		 * @return \Venus\src\Helium\Entity\right
 		 */
 	
 		public function set_name($name) {
@@ -149,80 +125,28 @@
 		}
 	
 		/**
-		 * get firstname of user
+		 * get description of right
 		 *
 		 * @access public
 		 * @return string
 		 */
 	
-		public function get_firstname() {
+		public function get_description() {
 	
-			return $this->firstname;
+			return $this->description;
 		}
 	
 		/**
-		 * set firstname of user
+		 * set description of right
 		 *
 		 * @access public
-		 * @param  string $firstname firstname of user
-		 * @return \Venus\src\Helium\Entity\user
+		 * @param  string $description description of right
+		 * @return \Venus\src\Helium\Entity\right
 		 */
 	
-		public function set_firstname($firstname) {
+		public function set_description($description) {
 	
-			$this->firstname = $firstname;
-			return $this;
-		}
-	
-		/**
-		 * get email of user
-		 *
-		 * @access public
-		 * @return string
-		 */
-	
-		public function get_email() {
-	
-			return $this->email;
-		}
-	
-		/**
-		 * set email of user
-		 *
-		 * @access public
-		 * @param  string $email email of user
-		 * @return \Venus\src\Helium\Entity\user
-		 */
-	
-		public function set_email($email) {
-	
-			$this->email = $email;
-			return $this;
-		}
-	
-		/**
-		 * get password of user
-		 *
-		 * @access public
-		 * @return string
-		 */
-	
-		public function get_password() {
-	
-			return $this->password;
-		}
-	
-		/**
-		 * set password of user
-		 *
-		 * @access public
-		 * @param  string $password password of user
-		 * @return \Venus\src\Helium\Entity\user
-		 */
-	
-		public function set_password($password) {
-	
-			$this->password = $password;
+			$this->description = $description;
 			return $this;
 		}
 	}
