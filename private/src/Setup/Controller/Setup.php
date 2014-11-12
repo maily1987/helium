@@ -113,7 +113,6 @@ class Setup extends Controller {
 
 		$this->layout
 			 ->assign('model', '/src/Setup/View/Configuration.tpl')
-			 ->assign('setup', $aVerification)
 			 ->display();
 	}
 
@@ -158,8 +157,8 @@ class Setup extends Controller {
 			
 			$oUserRight = new UserRight;
 			
-			$oUserRight->set_user_id($iIdUser)
-				   	   ->set_right_id(1)
+			$oUserRight->set_id_user($iIdUser)
+				   	   ->set_id_right(1)
 				   	   ->save();
 			
 			$oRight = new Right;
@@ -171,8 +170,8 @@ class Setup extends Controller {
 			
 			$oUserRight = new UserRight;
 			
-			$oUserRight->set_user_id($iIdUser)
-				   	   ->set_right_id(2)
+			$oUserRight->set_id_user($iIdUser)
+				   	   ->set_id_right(2)
 				   	   ->save();
 		}
 		else {

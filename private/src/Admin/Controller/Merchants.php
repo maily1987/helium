@@ -16,7 +16,6 @@
 
 namespace Venus\src\Admin\Controller;
 
-use \Venus\core\Config as Config;
 use \Venus\src\Admin\common\Controller as Controller;
 use \Venus\src\Helium\Model\merchant as Merchant;
 
@@ -57,6 +56,8 @@ class Merchants extends Controller {
 
 	public function index() {
 	
+		$this->_checkRight(2);
+		
 		if (isset($_GET) && isset($_GET['remove'])) {
 
 			$oMerchant = new Merchant;
@@ -80,6 +81,8 @@ class Merchants extends Controller {
 	 */
 
 	public function add() {
+	
+		$this->_checkRight(2);
 		
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')
@@ -121,6 +124,8 @@ class Merchants extends Controller {
 	 */
 
 	public function update() {
+	
+		$this->_checkRight(2);
 		
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')

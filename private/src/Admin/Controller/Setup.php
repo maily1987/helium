@@ -56,6 +56,8 @@ class Setup extends Controller {
 
 	public function index() {
 
+		$this->_checkRight(1);
+		
 		$oConfigConst = Config::get('Const');
 		
 		$this->layout

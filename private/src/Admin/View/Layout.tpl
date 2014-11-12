@@ -42,12 +42,12 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
-          <form class="navbar-form navbar-right" role="form">
+          <form class="navbar-form navbar-right" role="form" method="post">
             <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
+              <input type="text" name="email" placeholder="Email" class="form-control">
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
+              <input type="password" name="password" placeholder="Password" class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
           </form>

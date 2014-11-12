@@ -104,6 +104,8 @@ class Users extends Controller {
 			$aFinalRight[$oOneRight->get_id()] = $oOneRight->get_name();
 		}
 		
+		if (isset($_POST['password'])) { $_POST['password'] = md5($_POST['password']); }
+			
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')
 					  ->add('firstname', 'text', 'Firstname')
