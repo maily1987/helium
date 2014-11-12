@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Controller to Vat
+ * Controller to Countries
  *
  * @category  	src
  * @package   	src\Admin\Controller
@@ -18,10 +18,9 @@ namespace Venus\src\Admin\Controller;
 
 use \Venus\src\Admin\common\Controller as Controller;
 use \Venus\src\Helium\Model\country as CountriesModel;
-use \Venus\src\Helium\Model\vat as VatModel;
 
 /**
- * Controller to Vat
+ * Controller to Countries
  *
  * @category  	src
  * @package   	src\Admin\Controller
@@ -34,7 +33,7 @@ use \Venus\src\Helium\Model\vat as VatModel;
  * @since     	1.0
  */
 
-class Vat extends Controller {
+class Countries extends Controller {
 
 	/**
 	 * Constructor
@@ -49,7 +48,7 @@ class Vat extends Controller {
 	}
 
 	/**
-	 * The page of the vat manager (list)
+	 * The page of the Countries manager (list)
 	 *
 	 * @access public
 	 * @return void
@@ -59,75 +58,58 @@ class Vat extends Controller {
 
 		if (isset($_GET) && isset($_GET['remove'])) {
 
-			$oVat = new VatModel;
-			$oVatEntity = $oVat->findOneByid($_GET['remove']);
-			$oVatEntity->remove();
+			$oCountries = new CountriesModel;
+			$oCountryEntity = $oCountries->findOneByid($_GET['remove']);
+			$oCountryEntity->remove();
 		}
 		
-		$oVat = new VatModel;
-		$aVats = $oVat->findAll();
+		$oCountries = new CountriesModel;
+		$aCountries = $oCountries->findAll();
 		
 		$this->layout
-			 ->assign('vats', $aVats)
+			 ->assign('countries', $aCountries)
 			 ->display();
 	}
 
 	/**
-	 * The page of the vat manager (add)
+	 * The page of the Countries manager (add)
 	 *
 	 * @access public
 	 * @return void
 	 */
 
 	public function add() {
-
-		$oCountries = new CountriesModel;
-		$aCountries = $oCountries->findAll();
-		
-		$aFinalCountries = array();
-		
-		foreach ($aCountries as $mKey => $oCountry) {
-			
-			$aFinalCountries[$oCountry->get_id()] = $oCountry->get_name();
-		}
 		
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')
-					  ->add('vat_percent', 'text', 'Percent')
-					  ->add('id_country', 'select', 'Country', null, $aFinalCountries)
 					  ->add('validate', 'submit')
-					  ->synchronizeEntity('Venus\src\Helium\Entity\vat')
+					  ->synchronizeEntity('Venus\src\Helium\Entity\country')
 					  ->getForm();
 
 		$this->layout
 			 ->assign('form', $sForm)
-			 ->assign('model', '/src/Admin/View/VatAdd.tpl')
+			 ->assign('model', '/src/Admin/View/CountriesAdd.tpl')
 			 ->display();
 	}
 
 	/**
-	 * The page of the vat manager (update)
+	 * The page of the Countries manager (update)
 	 *
 	 * @access public
 	 * @return void
 	 */
 
 	public function update() {
-
-		$oCountries = new CountriesModel;
-		$aCountries = $oCountries->findAll();
 		
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')
-					  ->add('vat_percent', 'text', 'Percent')
-					  ->add('id_country', 'select', 'Country', $aCountries)
 					  ->add('validate', 'submit')
-					  ->synchronizeEntity('Venus\src\Helium\Entity\vat', $_GET['update'])
+					  ->synchronizeEntity('Venus\src\Helium\Entity\country', $_GET['update'])
 					  ->getForm();
 
 		$this->layout
 			 ->assign('form', $sForm)
-			 ->assign('model', '/src/Admin/View/VatAdd.tpl')
+			 ->assign('model', '/src/Admin/View/CountriesAdd.tpl')
 			 ->display();
 	}
 }

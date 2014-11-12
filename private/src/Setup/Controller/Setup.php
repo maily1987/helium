@@ -18,6 +18,7 @@ namespace Venus\src\Setup\Controller;
 
 use \Venus\src\Helium\Entity\right as Right;
 use \Venus\src\Helium\Entity\user as User;
+use \Venus\src\Helium\Entity\user_right as UserRight;
 use \Venus\src\Setup\common\Controller as Controller;
 
 /**
@@ -144,21 +145,35 @@ class Setup extends Controller {
 			
 			$oUser = new User;
 			
-			$oUser->set_name('admin')
-				  ->set_password(md5('admin'))
-				  ->save();
+			$iIdUser = $oUser->set_name('admin')
+				  			 ->set_password(md5('admin'))
+				  			 ->save();
 			
 			$oRight = new Right;
 			
-			$oRight->set_name('Access Setup')
+			$oRight->set_id(1)
+				   ->set_name('Access Setup')
 				   ->set_description('Give access at the user at the Setup Manager')
 				   ->save();
 			
+			$oUserRight = new UserRight;
+			
+			$oUserRight->set_user_id($iIdUser)
+				   	   ->set_right_id(1)
+				   	   ->save();
+			
 			$oRight = new Right;
 			
-			$oRight->set_name('Access Merchant')
+			$oRight->set_id(2)
+				   ->set_name('Access Merchant')
 				   ->set_description('Give access at the user at the Merchant Manager')
 				   ->save();
+			
+			$oUserRight = new UserRight;
+			
+			$oUserRight->set_user_id($iIdUser)
+				   	   ->set_right_id(2)
+				   	   ->save();
 		}
 		else {
 			

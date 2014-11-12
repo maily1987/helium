@@ -106,6 +106,9 @@ class Users extends Controller {
 		
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')
+					  ->add('firstname', 'text', 'Firstname')
+					  ->add('email', 'text', 'Email')
+					  ->add('password', 'password', 'Password')
 					  ->add('id_merchant', 'list_checkbox', 'Merchants', $aFinalMerchant)
 					  ->add('id_right', 'list_checkbox', 'Rights', $aFinalRight)
 					  ->add('validate', 'submit')
