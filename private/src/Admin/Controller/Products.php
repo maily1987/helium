@@ -55,6 +55,8 @@ class Products extends Controller {
 	 */
 
 	public function index() {
+	
+		$this->_checkRight(4);
 
 		if (isset($_GET) && isset($_GET['remove'])) {
 
@@ -79,6 +81,8 @@ class Products extends Controller {
 	 */
 
 	public function add() {
+	
+		$this->_checkRight(4);
 		
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')
@@ -105,6 +109,8 @@ class Products extends Controller {
 	 */
 
 	public function update() {
+	
+		$this->_checkRight(4);
 		
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')

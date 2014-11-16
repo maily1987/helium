@@ -54,6 +54,8 @@ class Offers extends Controller {
 	 */
 
 	public function index() {
+	
+		$this->_checkRight(5);
 
 		$this->layout
 			 ->display();

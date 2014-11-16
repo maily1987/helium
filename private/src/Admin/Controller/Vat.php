@@ -56,6 +56,8 @@ class Vat extends Controller {
 	 */
 
 	public function index() {
+	
+		$this->_checkRight(6);
 
 		if (isset($_GET) && isset($_GET['remove'])) {
 
@@ -80,6 +82,8 @@ class Vat extends Controller {
 	 */
 
 	public function add() {
+	
+		$this->_checkRight(6);
 
 		$oCountries = new CountriesModel;
 		$aCountries = $oCountries->findAll();
@@ -113,6 +117,8 @@ class Vat extends Controller {
 	 */
 
 	public function update() {
+	
+		$this->_checkRight(6);
 
 		$oCountries = new CountriesModel;
 		$aCountries = $oCountries->findAll();

@@ -56,6 +56,8 @@ class Brands extends Controller {
 
 	public function index() {
 
+		$this->_checkRight(3);
+		
 		if (isset($_GET) && isset($_GET['remove'])) {
 
 			$oBrand = new Brand;
@@ -79,6 +81,8 @@ class Brands extends Controller {
 	 */
 
 	public function add() {
+
+		$this->_checkRight(3);
 		
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')
@@ -100,6 +104,8 @@ class Brands extends Controller {
 	 */
 
 	public function update() {
+
+		$this->_checkRight(3);
 		
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')

@@ -59,6 +59,8 @@ class Users extends Controller {
 	 */
 
 	public function index() {
+	
+		$this->_checkRight(7);
 
 		if (isset($_GET) && isset($_GET['remove'])) {
 
@@ -83,6 +85,8 @@ class Users extends Controller {
 	 */
 
 	public function add() {
+	
+		$this->_checkRight(7);
 		
 		$oMerchant = new Merchant;
 		$aMerchants = $oMerchant->findAll();
@@ -127,7 +131,8 @@ class Users extends Controller {
 				$oUserMerchant = new UserMerchant;
 				
 				$oUserMerchant->set_id_merchant($iIdMerchant)
-							  ->set_id_user($iIdUser);
+							  ->set_id_user($iIdUser)
+						      ->save();
 			}
 		}
 		
@@ -138,7 +143,8 @@ class Users extends Controller {
 				$oUserRight = new UserRight;
 				
 				$oUserRight->set_id_right($iIdRight)
-						   ->set_id_user($iIdUser);
+						   ->set_id_user($iIdUser)
+						   ->save();
 			}
 		}
 
@@ -156,6 +162,8 @@ class Users extends Controller {
 	 */
 
 	public function update() {
+
+		$this->_checkRight(7);
 		
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')

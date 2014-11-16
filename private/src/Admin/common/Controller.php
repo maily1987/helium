@@ -105,7 +105,7 @@ abstract class Controller extends CoreController {
 		if ($this->cookie->exists('id') && $iRight > 0) {
 			
 			$oUserRight = new UserRight;
-			$aUserRight = $oUserRight->findBy(array('id_user' => $this->cookie->exists('id'), 'id_right' => $iRight));
+			$aUserRight = $oUserRight->findBy(array('id_user' => $this->cookie->get('id'), 'id_right' => $iRight));
 
 			if (count($aUserRight) > 0) {
 				

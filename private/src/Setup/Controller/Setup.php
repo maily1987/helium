@@ -173,6 +173,84 @@ class Setup extends Controller {
 			$oUserRight->set_id_user($iIdUser)
 				   	   ->set_id_right(2)
 				   	   ->save();
+			
+			$oRight = new Right;
+			
+			$oRight->set_id(3)
+				   ->set_name('Access Brand')
+				   ->set_description('Give access at the user at the Brand Manager')
+				   ->save();
+			
+			$oUserRight = new UserRight;
+			
+			$oUserRight->set_id_user($iIdUser)
+				   	   ->set_id_right(3)
+				   	   ->save();
+			
+			$oRight = new Right;
+			
+			$oRight->set_id(4)
+				   ->set_name('Access Product')
+				   ->set_description('Give access at the user at the Product Manager')
+				   ->save();
+			
+			$oUserRight = new UserRight;
+			
+			$oUserRight->set_id_user($iIdUser)
+				   	   ->set_id_right(4)
+				   	   ->save();
+			
+			$oRight = new Right;
+			
+			$oRight->set_id(5)
+				   ->set_name('Access Offer')
+				   ->set_description('Give access at the user at the Offer Manager')
+				   ->save();
+			
+			$oUserRight = new UserRight;
+			
+			$oUserRight->set_id_user($iIdUser)
+				   	   ->set_id_right(5)
+				   	   ->save();
+			
+			$oRight = new Right;
+			
+			$oRight->set_id(6)
+				   ->set_name('Access Vat')
+				   ->set_description('Give access at the user at the Vat Manager')
+				   ->save();
+			
+			$oUserRight = new UserRight;
+			
+			$oUserRight->set_id_user($iIdUser)
+				   	   ->set_id_right(6)
+				   	   ->save();
+			
+			$oRight = new Right;
+			
+			$oRight->set_id(7)
+				   ->set_name('Access User')
+				   ->set_description('Give access at the user at the User Manager')
+				   ->save();
+			
+			$oUserRight = new UserRight;
+			
+			$oUserRight->set_id_user($iIdUser)
+				   	   ->set_id_right(7)
+				   	   ->save();
+			
+			$oRight = new Right;
+			
+			$oRight->set_id(8)
+				   ->set_name('Access Country')
+				   ->set_description('Give access at the user at the Country Manager')
+				   ->save();
+			
+			$oUserRight = new UserRight;
+			
+			$oUserRight->set_id_user($iIdUser)
+				   	   ->set_id_right(8)
+				   	   ->save();
 		}
 		else {
 			

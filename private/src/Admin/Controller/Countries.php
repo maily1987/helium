@@ -56,6 +56,8 @@ class Countries extends Controller {
 
 	public function index() {
 
+		$this->_checkRight(8);
+
 		if (isset($_GET) && isset($_GET['remove'])) {
 
 			$oCountries = new CountriesModel;
@@ -79,6 +81,8 @@ class Countries extends Controller {
 	 */
 
 	public function add() {
+
+		$this->_checkRight(8);
 		
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')
@@ -100,6 +104,8 @@ class Countries extends Controller {
 	 */
 
 	public function update() {
+
+		$this->_checkRight(8);
 		
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')
