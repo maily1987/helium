@@ -7,7 +7,7 @@
  * @package   	src\Admin\Controller
  * @author    	Judicaël Paquet <judicael.paquet@gmail.com>
  * @copyright 	Copyright (c) 2013-2014 PAQUET Judicaël FR Inc. (https://github.com/las93)
- * @license   	https://github.com/las93/helium/LICENSE.md Tout droit réservé à PAQUET Judicaël
+ * @license   	https://github.com/las93/helium/blob/master/LICENSE.md Tout droit réservé à PAQUET Judicaël
  * @version   	Release: 1.0.0
  * @filesource	https://github.com/las93/helium
  * @link      	https://github.com/las93
@@ -22,6 +22,8 @@ use \Venus\src\Helium\Entity\user_right as UserRight;
 use \Venus\src\Helium\Model\merchant as Merchant;
 use \Venus\src\Helium\Model\right as Right;
 use \Venus\src\Helium\Model\user as User;
+use \Venus\src\Helium\Model\user_merchant as UserMerchantModel;
+use \Venus\src\Helium\Model\user_right as UserRightModel;
 
 /**
  * Controller to Users
@@ -30,7 +32,7 @@ use \Venus\src\Helium\Model\user as User;
  * @package   	src\Admin\Controller
  * @author    	Judicaël Paquet <judicael.paquet@gmail.com>
  * @copyright 	Copyright (c) 2013-2014 PAQUET Judicaël FR Inc. (https://github.com/las93)
- * @license   	https://github.com/las93/helium/LICENSE.md Tout droit réservé à PAQUET Judicaël
+ * @license   	https://github.com/las93/helium/blob/master/LICENSE.md Tout droit réservé à PAQUET Judicaël
  * @version   	Release: 1.0.0
  * @filesource	https://github.com/las93/helium
  * @link      	https://github.com/las93
@@ -164,7 +166,57 @@ class Users extends Controller {
 	public function update() {
 
 		$this->_checkRight(7);
+
+		$oMerchant = new Merchant;
+		$aMerchants = $oMerchant->findAll();
 		
+		$aFinalMerchant = array();
+		
+		foreach ($aMerchants as $oOneMerchant) {
+				
+			$aFinalMerchant[$oOneMerchant->get_id()] = $oOneMerchant->get_name();
+		}
+		
+		$oRight = new Right;
+		$aRights = $oRight->findAll();
+		
+		$aFinalRight = array();
+		
+		foreach ($aRights as $oOneRight) {
+				
+			$aFinalRight[$oOneRight->get_id()] = $oOneRight->get_name();
+		}
+
+		$oUserMerchant = new UserMerchantModel;
+		$aUserMerchants = $oUserMerchant->findByid_user($_GET['update']);
+		$aFinalUserMerchant = array();
+		
+		foreach ($aUserMerchants as $oOneUserMerchant) {
+				
+			$aFinalUserMerchant[] = $oOneUserMerchant->get_id_merchant();
+		}
+
+		$oUserRight = new UserRightModel;
+		$aUserRights = $oUserRight->findByid_user($_GET['update']);
+		$aFinalUserRight = array();
+		
+		foreach ($aUserRights as $oOneUserRight) {
+				
+			$aFinalUserRight[] = $oOneUserRight->get_id_right();
+		}
+		
+		if (isset($_POST['password'])) { $_POST['password'] = md5($_POST['password']); }
+
+		$sForm = $this->form
+					  ->add('name', 'text', 'Name')
+					  ->add('firstname', 'text', 'Firstname')
+					  ->add('email', 'text', 'Email')
+					  ->add('id_merchant', 'list_checkbox', 'Merchants', $aFinalMerchant, $aFinalUserMerchant)
+					  ->add('id_right', 'list_checkbox', 'Rights', $aFinalRight, $aFinalUserRight)
+					  ->add('validate', 'submit')
+					  ->synchronizeEntity('Venus\src\Helium\Entity\user', $_GET['update'])
+					  ->getForm();
+				
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')
 					  ->add('validate', 'submit')
