@@ -1,5 +1,5 @@
-VENUS FRAMEWORK PHP
-===================
+HELIUM ECOMMERCE CMS
+====================
 
 Helium eCommerce
 
