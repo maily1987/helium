@@ -55,6 +55,8 @@ class Home extends Controller {
 
 	public function index() {
 
+		$this->_loadLayout();
+
 		$this->layout
 			 ->display();
 	}

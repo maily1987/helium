@@ -38,8 +38,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
            <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
+            <li class="active"><a href="/">Home</a></li>
+            {foreach from=$categories item=$one_categories}
+                <li><a href="#about">{$one_categories->get_name()}</a></li>
+            {/foreach}
             <li><a href="#contact">Contact</a></li>
           </ul>
           <form class="navbar-form navbar-right" role="form">
