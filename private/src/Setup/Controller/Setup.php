@@ -17,8 +17,10 @@
 namespace Venus\src\Setup\Controller;
 
 use \Venus\src\Helium\Entity\category as Category;
+use \Venus\src\Helium\Entity\country as Country;
 use \Venus\src\Helium\Entity\right as Right;
 use \Venus\src\Helium\Entity\user as User;
+use \Venus\src\Helium\Entity\vat as Vat;
 use \Venus\src\Helium\Entity\user_right as UserRight;
 use \Venus\src\Setup\common\Controller as Controller;
 
@@ -146,6 +148,39 @@ class Setup extends Controller {
 			$oPdo->query('TRUNCATE user');
 			$oPdo->query('TRUNCATE user_merchant');
 			$oPdo->query('TRUNCATE user_right');
+			$oPdo->query('TRUNCATE vat');
+			
+			$oCountry = new Country;
+			
+			$iIdCountry = $oCountry->set_name('France')
+				  			 	   ->save();
+			
+			$oVat = new Vat;
+			
+			 $oVat->set_id_country($iIdCountry)
+				  ->set_name('Fr Normal')
+				  ->set_vat_percent(20)
+				  ->save();
+			
+			$oVat = new Vat;
+			
+			$oVat->set_id_country($iIdCountry)
+				 ->set_name('Fr Intermediaite')
+				 ->set_vat_percent(10)
+				  			->save();
+			$oVat = new Vat;
+			
+			$oVat->set_id_country($iIdCountry)
+				 ->set_name('Fr Reduce')
+				 ->set_vat_percent(5.5)
+				 ->save();
+			
+			$oVat = new Vat;
+			
+			$oVat->set_id_country($iIdCountry)
+				 ->set_name('Fr Medicinal')
+				 ->set_vat_percent(2.1)
+				 ->save();
 			
 			$oUser = new User;
 			

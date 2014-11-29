@@ -57,12 +57,12 @@ abstract class Controller extends CoreController {
 	protected function _loadLayout() {
 
 		$oCategory = new Category;
-		$aCategories = $oCategory->getAllCategoriesInOrder(0);
+		$aCategories = $oCategory->getAllCategoriesInOrder(0, true);
 		
 		foreach ($aCategories as $iKey => $aOneCategorie) {
 
 			$oCategory = new Category;
-			$aCategories[$iKey]->sub_menu = $oCategory->getAllCategoriesInOrder($aOneCategorie->get_id());
+			$aCategories[$iKey]->sub_menu = $oCategory->getAllCategoriesInOrder($aOneCategorie->get_id(), true);
 		}
 		
 		$this->layout

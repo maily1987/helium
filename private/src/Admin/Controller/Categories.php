@@ -90,10 +90,30 @@ class Categories extends Controller {
 
 		$this->_checkRight(8);
 		
+		$oCategory = new Category;
+		$aCategories = $oCategory->findAll();
+		$aFinalCategories = array('0' => '--None--');
+		
+		foreach ($aCategories as $aOneCategorie) {
+		 
+			$oCategory = new Category;
+			$aFinalCategories[$aOneCategorie->get_id()] = $aOneCategorie->get_name();
+		}
+		
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')
+					  ->add('id_category', 'select', 'Category parent', null, $aFinalCategories)
+					  ->add('id_shortcuts_category', 'select', 'Category shortcut', null, $aFinalCategories)
+					  ->add('Enable', 'label')
+					  ->add('enable', 'radio', 'Yes')
+					  ->add('enable', 'radio', 'No')
+					  ->add('Visible', 'label')
+					  ->add('visible', 'radio', 'Yes')
+					  ->add('visible', 'radio', 'No')
+					  ->add('section', 'text', 'Section')
+					  ->add('route_alias', 'text', 'Route Alias')
 					  ->add('validate', 'submit')
-					  ->synchronizeEntity('Venus\src\Helium\Entity\country')
+					  ->synchronizeEntity('Venus\src\Helium\Entity\category')
 					  ->getForm();
 
 		$this->layout

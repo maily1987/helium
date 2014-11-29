@@ -39,17 +39,31 @@ class category extends Model {
 	 *
 	 * @access public
 	 * @param  integer $iParentCategoryId perent category id
+	 * @param  bool $bVisibleAndEnableCheck check if the category is enable and visible 
 	 * @return array
 	 */
 	
-	public function getAllCategoriesInOrder($iParentCategoryId) {
+	public function getAllCategoriesInOrder($iParentCategoryId, $bVisibleAndEnableCheck = false) {
 	
 		$aResult = array();
 	
+		$this->orm
+			 ->select(array('*'))
+			 ->from($this->_sTableName)
+			 ->where($this->where->whereEqual('id_category', $iParentCategoryId));
+		
+		if ($bVisibleAndEnableCheck === true) {
+
+			$this->orm
+				 ->where($this->where->whereEqual('id_category', $iParentCategoryId)->andWhereEqual('enable', 1)->andWhereEqual('visible', 1));
+		}
+		else {
+						
+			$this->orm
+				 ->where($this->where->whereEqual('id_category', $iParentCategoryId));
+		}
+						
 		$aResult = $this->orm
-						->select(array('*'))
-						->from($this->_sTableName)
-						->where($this->where->whereEqual('id_category', $iParentCategoryId))
 						->orderBy(['`order` ASC'])
 						->load(false, 'Helium');
 
