@@ -66,8 +66,14 @@ class Categories extends Controller {
 		}
 		
 		$oCategory = new Category;
-		$aCategories = $oCategory->findAll();
+		$aCategories = $oCategory->getAllCategoriesInOrder(0);
 		
+		foreach ($aCategories as $iKey => $aOneCategorie) {
+
+			$oCategory = new Category;
+			$aCategories[$iKey]->sub_menu = $oCategory->getAllCategoriesInOrder($aOneCategorie->get_id());
+		}
+
 		$this->layout
 			 ->assign('categories', $aCategories)
 			 ->display();

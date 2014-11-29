@@ -51,7 +51,7 @@ class category extends Model {
 						->from($this->_sTableName)
 						->where($this->where->whereEqual('id_category', $iParentCategoryId))
 						->orderBy(['`order` ASC'])
-						->load();
+						->load(false, 'Helium');
 
 		return $aResult;
 	}

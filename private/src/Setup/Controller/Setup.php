@@ -541,6 +541,7 @@ class Setup extends Controller {
 					  ->set_visible(1)
 					  ->set_order(4)
 					  ->set_section(2)
+					  ->set_route_alias('Helium-Rachete-Reprise-Livres')
 					  ->save();
 			
 			$oCategory = new Category;

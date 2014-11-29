@@ -11,7 +11,7 @@
     <title>Helium - site eCommerce</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="/css/helium.css" rel="stylesheet">
@@ -65,15 +65,9 @@
       </div>
     </nav>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        {include file=$model}
-      </div>
-    </div>
 
     <div class="container">
-      
+      {include file=$model}
       </div>
 
       <hr>

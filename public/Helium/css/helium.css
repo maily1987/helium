@@ -9,3 +9,13 @@ body {
     height:30px;
   }
 }
+
+hr.forh1 {
+	margin-top: 0px;
+	border-top-color:#555555;
+}
+
+.a-center-line {
+	float:left;
+	width:100%;
+}
