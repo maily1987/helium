@@ -135,7 +135,7 @@ class Setup extends Controller {
 			$sFileConf = preg_replace('/"password": "test",/', '"password": "'.$_POST['password'].'",', $sFileConf);
 			file_put_contents('../../private/src/Helium/conf/Db.conf', $sFileConf);
 			
-			$aOptions = array('p' => 'Helium', 'r' => 'yes', 'c' => true, 'f' => true);
+			$aOptions = array('p' => 'Helium', 'r' => 'yes', 'c' => true, 'f' => true, 'd' => true);
 
 			$oPdo = new \PDO('mysql:host='.$_POST['host'], $_POST['login'], $_POST['password'], array());
 			$oPdo->query('CREATE DATABASE IF NOT EXISTS '.$_POST['name']);
@@ -387,6 +387,7 @@ class Setup extends Controller {
 					  ->set_visible(1)
 					  ->set_order(1)
 					  ->set_section(1)
+					  ->set_route_alias('livre-achat-occasion-litterature-roman')
 					  ->save();
 			
 			$oCategory = new Category;
@@ -397,6 +398,7 @@ class Setup extends Controller {
 					  ->set_visible(1)
 					  ->set_order(2)
 					  ->set_section(1)
+					  ->set_route_alias('livres-anglais-etranger')
 					  ->save();
 			
 			$oCategory = new Category;
@@ -407,6 +409,7 @@ class Setup extends Controller {
 					  ->set_visible(1)
 					  ->set_order(3)
 					  ->set_section(1)
+					  ->set_route_alias('ecole-cahiers-soutien-scolaire-livre')
 					  ->save();
 			
 			$oCategory = new Category;
@@ -417,6 +420,7 @@ class Setup extends Controller {
 					  ->set_visible(1)
 					  ->set_order(4)
 					  ->set_section(1)
+					  ->set_route_alias('livre-audio-contes-apprendre-musical')
 					  ->save();
 			
 			$oCategory = new Category;

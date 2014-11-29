@@ -38,9 +38,17 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
            <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
+            <!-- <li class="active"><a href="/">Home</a></li> -->
             {foreach from=$categories item=$one_categories}
-                <li><a href="#about">{$one_categories->get_name()}</a></li>
+                <li style="color:white;">&nbsp;{$one_categories->get_name()}
+                {if count($one_categories->sub_menu) > 0}
+                    {foreach from=$one_categories->sub_menu item=$one_sub_categories}
+                        <ul class="nav navbar-inverse">
+                            <li style="font-size:10px;"><a href="{url alias=$one_sub_categories->get_route_alias()}">&nbsp;&nbsp;&nbsp;&nbsp;{$one_sub_categories->get_name()}</a></li>
+                        </ul>
+                   {/foreach}
+                {/if}
+                </li>
             {/foreach}
             <li><a href="#contact">Contact</a></li>
           </ul>

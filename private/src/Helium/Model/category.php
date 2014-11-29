@@ -50,7 +50,7 @@ class category extends Model {
 						->select(array('*'))
 						->from($this->_sTableName)
 						->where($this->where->whereEqual('id_category', $iParentCategoryId))
-						->orderBy(['`order` DESC'])
+						->orderBy(['`order` ASC'])
 						->load();
 
 		return $aResult;
