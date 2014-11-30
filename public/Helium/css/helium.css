@@ -19,3 +19,86 @@ hr.forh1 {
 	float:left;
 	width:100%;
 }
+
+.cadre_tier {
+    float:left;
+    width:250px;
+	font-size:10px;
+	font-weight:bold;
+}
+
+.cadre_tier img {
+    margin-bottom:10px;
+}
+
+.cadre_tier ul {
+	padding-left:14px;
+    font-size:9px;	
+}
+
+.cadre_tier p  {
+    font-size:9px; 
+    font-weight:normal;
+    margin-left:0px;	
+}
+
+.cadre_tier ul li {
+    font-weight:normal;
+	margin-left:0px;
+}
+
+.cadre_all_border_grey {
+    float:left;
+    width:100%;
+    font-size:12px;
+	color:orange;
+    font-weight:bold;
+	border:solid 1px #AAAAAA;
+	padding:10px;
+}
+
+.cadre_all_border_grey p {
+    text-align:center;
+    font-size:10px;
+    color:black;
+    font-weight:normal;
+}
+
+.cadre_all_border_grey p input[Type="button"] {
+    text-shadow: 0px 1px 0px #ffe093;
+}
+
+.cadre_link_bottom {
+    float:left;
+    width:25%;	
+    font-size:10px;
+    color:black;	
+}
+
+.cadre_link_bottom h2 {
+    font-size:10px;
+	margin-bottom:0px;
+    color:orange;	
+    font-weight:bold;	
+}
+
+.cadre_bottom_large {
+    float:left;
+    width:100%;  
+    font-size:9px;
+    color:black;    
+}
+
+.cadre_mini_link_bottom {
+    float:left;
+    width:20%;  
+    font-size:9px;
+    color:black; 
+	text-align:center;   
+	margin-top:10px;
+}
+
+.cadre_mini_link_bottom span {
+    font-size:8px;
+    color:grey;    
+}

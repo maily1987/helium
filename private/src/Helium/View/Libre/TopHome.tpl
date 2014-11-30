@@ -1,0 +1,1 @@
+<img src="/img/libre/black-friday.jpg" width="100%" style="margin-top:10px;"/>

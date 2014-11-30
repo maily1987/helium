@@ -17,6 +17,7 @@
 namespace Venus\src\Helium\Controller;
 
 use \Venus\src\Helium\common\Controller as Controller;
+use \Venus\src\Helium\Model\category as Category;
 
 /**
  * Controller to test
@@ -57,6 +58,9 @@ class Home extends Controller {
 
 		$this->_loadLayout();
 
+		$oCategory = new Category;
+		$oCategory->getAllCategoriesInOrder($iParentCategoryId, true);
+		
 		$this->layout
 			 ->display();
 	}
