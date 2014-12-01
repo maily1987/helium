@@ -309,7 +309,7 @@ class Setup extends Controller {
 			
 			$oCategory->set_enable(1)
 					  ->set_id_category(0)
-					  ->set_name('Musique, DVD, Blu-ray')
+					  ->set_name('Musique, DVD')
 					  ->set_visible(1)
 					  ->set_order(2)
 					  ->set_section(1)
@@ -319,7 +319,7 @@ class Setup extends Controller {
 			
 			$oCategory->set_enable(1)
 					  ->set_id_category(0)
-					  ->set_name('Jeux vidéo et Consoles')
+					  ->set_name('Jeux vidéo')
 					  ->set_visible(1)
 					  ->set_order(3)
 					  ->set_section(1)
@@ -329,7 +329,7 @@ class Setup extends Controller {
 			
 			$oCategory->set_enable(1)
 					  ->set_id_category(0)
-					  ->set_name('High-Tech et Informatique')
+					  ->set_name('High-Tech ')
 					  ->set_visible(1)
 					  ->set_order(4)
 					  ->set_section(1)
@@ -339,7 +339,7 @@ class Setup extends Controller {
 			
 			$oCategory->set_enable(1)
 					  ->set_id_category(0)
-					  ->set_name('Jouets, Enfants et Bébés')
+					  ->set_name('Enfants et Bébés')
 					  ->set_visible(1)
 					  ->set_order(5)
 					  ->set_section(1)
@@ -349,7 +349,7 @@ class Setup extends Controller {
 			
 			$oCategory->set_enable(1)
 					  ->set_id_category(0)
-					  ->set_name('Maison, Bricolage, Animalerie')
+					  ->set_name('Maison, Animalerie')
 					  ->set_visible(1)
 					  ->set_order(6)
 					  ->set_section(1)
@@ -359,7 +359,7 @@ class Setup extends Controller {
 			
 			$oCategory->set_enable(1)
 					  ->set_id_category(0)
-					  ->set_name('Beauté, Santé, Alimentation')
+					  ->set_name('Beauté, Santé')
 					  ->set_visible(1)
 					  ->set_order(7)
 					  ->set_section(1)
@@ -369,7 +369,7 @@ class Setup extends Controller {
 			
 			$oCategory->set_enable(1)
 					  ->set_id_category(0)
-					  ->set_name('Vêtements et Chaussures')
+					  ->set_name('Mode')
 					  ->set_visible(1)
 					  ->set_order(8)
 					  ->set_section(1)

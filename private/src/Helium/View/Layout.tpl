@@ -34,13 +34,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><img src="/img/logo.png" alt="Logo Helium" title="Logo Helium" id="logo_helium"/></a>
+          <a class="navbar-brand" href="{url alias='home'}"><img src="/img/logo.png" alt="Logo Helium" title="Logo Helium" id="logo_helium"/></a>
         </div>
+      </div>
         <div id="navbar" class="navbar-collapse collapse">
+      <div class="container">
            <ul class="nav navbar-nav">
-            <!-- <li class="active"><a href="/">Home</a></li> -->
+            <li id="homepage"=>&nbsp;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAVCAYAAABc6S4mAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAMSwAADEsBUs3p1QAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGOSURBVDiNtdO/S9ZRFAbwzyuCr5Jo9MOGDF2iKWqIwKEham5pqb0mHSKEaAuEpgZb6i8oiqCymlpsidwsiCCIBh1Sg7AISdDb8J4v3V5e86q9Bx743vN9zvNwzrlXSkkpcBlP0FNcUyhcw02kwBvs/S8G6MK9EJ7D8/j+iOGMdxB3AwNFBtiNVyE4gwPowO3IfcHx4B7LOjyyqQGG8SEKHqAHE9UOMI51fMfZLRngBBaCfAO9eJwJzGAfLuIXVnEJrzc1wDn8xAouYAjvMvEKn3AYp7Ec3VzH/Q0NMIa1mO1JnMJSC/EKXzGCo5iP3CTqfxnE4m4F4S0ORcur/xCvsILzGMT7yD1EV2ir41H8mEJ/dktKsYYrUVvdumn0wdNY1AT24OUWxXNMoht3QvMFjbu+P9p5tgPxCqOh1Yd6Z0rpmz/Ra+exC1JKyzSW29Zou0FnIe8HRrEY5zO4WlTZ9NCmtV7cbBOvfwNewrWcu90RFddt16DWboPiuuYlL7ZkNWabR03jpTbHOj7nid9sUc6xKxoE8AAAAABJRU5ErkJggg57d3d456d8fe53e27135c7a24cb186de"/>&nbsp;&nbsp;
             {foreach from=$categories item=$one_categories}
-                <li style="color:white;">&nbsp;{$one_categories->get_name()}
+                <li>&nbsp;{$one_categories->get_name()}&nbsp;
                 {if count($one_categories->sub_menu) > 0}
                     {foreach from=$one_categories->sub_menu item=$one_sub_categories}
                         <ul class="nav navbar-inverse">
@@ -50,17 +52,7 @@
                 {/if}
                 </li>
             {/foreach}
-            <li><a href="#contact">Contact</a></li>
           </ul>
-          <form class="navbar-form navbar-right" role="form">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
