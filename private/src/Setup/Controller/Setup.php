@@ -149,6 +149,7 @@ class Setup extends Controller {
 			$oPdo->query('TRUNCATE user_merchant');
 			$oPdo->query('TRUNCATE user_right');
 			$oPdo->query('TRUNCATE vat');
+			$oPdo->query('TRUNCATE country');
 			
 			$oCountry = new Country;
 			

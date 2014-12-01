@@ -376,7 +376,7 @@ class Router {
 				$oController = new $sControllerName;
 
 				$aEntries = array();
-
+				
 				if (isset($oRoute->constraints) && is_object($oRoute->constraints)) {
 
 					$mReturn = null;
@@ -386,6 +386,11 @@ class Router {
 						if (isset($_GET[$sName])) {
 
 							$aEntries[] = $_GET[$sName];
+						}
+						else if (isset($oRoute->defaults_constraints) && is_object($oRoute->defaults_constraints)
+							&& isset($oRoute->defaults_constraints->{$sName})) {
+
+							$aEntries[] = $oRoute->defaults_constraints->{$sName};
 						}
 						else {
 
