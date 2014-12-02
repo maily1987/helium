@@ -18,6 +18,7 @@ namespace Venus\src\Setup\Controller;
 
 use \Venus\src\Helium\Entity\category as Category;
 use \Venus\src\Helium\Entity\country as Country;
+use \Venus\src\Helium\Entity\merchant as Merchant;
 use \Venus\src\Helium\Entity\right as Right;
 use \Venus\src\Helium\Entity\user as User;
 use \Venus\src\Helium\Entity\vat as Vat;
@@ -1246,6 +1247,19 @@ class Setup extends Controller {
 					  ->set_order(4)
 					  ->set_section(1)
 					  ->set_id_shortcuts_category(0)
+					  ->save();
+			
+			$oMerchant = new Merchant;
+			
+			$oMerchant->set_contact_country('France')
+					  ->set_name('Helium')
+					  ->set_store_url('http://www.helium.fr')
+					  ->set_contact_firstname('Judicaël')
+					  ->set_contact_lastname('Paquet')
+					  ->set_contact_function('CEO')
+					  ->set_contact_city('Saint Ouen')
+					  ->set_contact_zip('93400')
+					  ->set_contact_email('helium@gmail.com')
 					  ->save();
 		}
 		else {
