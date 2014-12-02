@@ -105,11 +105,11 @@ class Categories extends Controller {
 					  ->add('id_category', 'select', 'Category parent', null, $aFinalCategories)
 					  ->add('id_shortcuts_category', 'select', 'Category shortcut', null, $aFinalCategories)
 					  ->add('Enable', 'label')
-					  ->add('enable', 'radio', 'Yes')
-					  ->add('enable', 'radio', 'No')
+					  ->add('enable', 'radio', 'Yes', 1)
+					  ->add('enable', 'radio', 'No', 0)
 					  ->add('Visible', 'label')
-					  ->add('visible', 'radio', 'Yes')
-					  ->add('visible', 'radio', 'No')
+					  ->add('visible', 'radio', 'Yes', 1)
+					  ->add('visible', 'radio', 'No', 0)
 					  ->add('section', 'text', 'Section')
 					  ->add('route_alias', 'text', 'Route Alias')
 					  ->add('validate', 'submit')
@@ -131,12 +131,32 @@ class Categories extends Controller {
 
 	public function update() {
 
-		$this->_checkRight(8);
+
+		
+		$oCategory = new Category;
+		$aCategories = $oCategory->findAll();
+		$aFinalCategories = array('0' => '--None--');
+		
+		foreach ($aCategories as $aOneCategorie) {
+		 
+			$oCategory = new Category;
+			$aFinalCategories[$aOneCategorie->get_id()] = $aOneCategorie->get_name();
+		}
 		
 		$sForm = $this->form
 					  ->add('name', 'text', 'Name')
+					  ->add('id_category', 'select', 'Category parent', null, $aFinalCategories)
+					  ->add('id_shortcuts_category', 'select', 'Category shortcut', null, $aFinalCategories)
+					  ->add('Enable', 'label')
+					  ->add('enable', 'radio', 'Yes', 1)
+					  ->add('enable', 'radio', 'No', 0)
+					  ->add('Visible', 'label')
+					  ->add('visible', 'radio', 'Yes', 1)
+					  ->add('visible', 'radio', 'No', 0)
+					  ->add('section', 'text', 'Section')
+					  ->add('route_alias', 'text', 'Route Alias')
 					  ->add('validate', 'submit')
-					  ->synchronizeEntity('Venus\src\Helium\Entity\country', $_GET['update'])
+					  ->synchronizeEntity('Venus\src\Helium\Entity\category', $_GET['update'])
 					  ->getForm();
 
 		$this->layout

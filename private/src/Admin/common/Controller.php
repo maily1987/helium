@@ -54,6 +54,7 @@ abstract class Controller extends CoreController {
 
 		parent::__construct();
 		$this->_connection();
+		$this->_deconnection();
 	}
 	
 	/**
@@ -115,5 +116,21 @@ abstract class Controller extends CoreController {
 		}
 		
 		$this->redirect($this->url->getUrl('f403'));
+	}	
+	/**
+	 * Deconnection on the admin
+	 * 
+	 * @access protected
+	 * @return object
+	 */
+	
+	protected function _deconnection() {
+
+		if ($this->cookie->exists('user') && $this->cookie->exists('token') && isset($_GET['deconnection']) && $_GET['deconnection'] === "1") {
+
+			$this->cookie->set('user', null, 0);
+			$this->cookie->set('id', null, 0);
+			$this->cookie->set('token', null, 0);
+		}
 	}
 }

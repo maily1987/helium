@@ -34,23 +34,31 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Helium</a>
+          <a class="navbar-brand">Helium</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
            <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="{url alias='home'}">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
-          <form class="navbar-form navbar-right" role="form" method="post">
-            <div class="form-group">
-              <input type="text" name="email" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" name="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
+          {if isset($app.cookies.id) && $app.cookies.id > 0}
+            <form class="navbar-form navbar-right" role="form" method="post" style="color:white;">
+                    Welcome {$app.cookies.user}
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/?deconnection=1" style="color:white;text-decoration:underline">Deconnection</a>
+            </form>
+          {else}
+              <form class="navbar-form navbar-right" role="form" method="post" action="/">
+                <div class="form-group">
+                  <input type="text" name="email" placeholder="Email" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input type="password" name="password" placeholder="Password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success">Sign in</button>
+              </form>
+          {/if}
         </div><!--/.navbar-collapse -->
       </div>
     </nav>

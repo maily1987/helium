@@ -376,7 +376,7 @@ class Router {
 				$oController = new $sControllerName;
 
 				$aEntries = array();
-				
+
 				if (isset($oRoute->constraints) && is_object($oRoute->constraints)) {
 
 					$mReturn = null;

@@ -53,12 +53,12 @@
                 </li>
             {/foreach}
           </ul>
-        </div><!--/.navbar-collapse -->
-      </div>
+        </div>
+      </div><!--/.navbar-collapse -->
     </nav>
 
 
-    <div class="container">
+    <div class="container center-div">
         {include file=$model}
       
           <footer>
