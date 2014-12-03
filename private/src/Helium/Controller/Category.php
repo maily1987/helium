@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Controller to FreeContent
+ * Controller to Category
  *
  * @category  	src
  * @package   	src\Helium\Controller
@@ -17,9 +17,11 @@
 namespace Venus\src\Helium\Controller;
 
 use \Venus\src\Helium\common\Controller as Controller;
+use \Venus\src\Helium\Model\attribute_category as AttributeCategory;
+use \Venus\src\Helium\Model\category as ModelCategory;
 
 /**
- * Controller to FreeContent
+ * Controller to Category
  *
  * @category  	src
  * @package   	src\Helium\Controller
@@ -32,7 +34,7 @@ use \Venus\src\Helium\common\Controller as Controller;
  * @since     	1.0
  */
 
-class FreeContent extends Controller {
+class Category extends Controller {
 
 	/**
 	 * Constructor
@@ -47,19 +49,34 @@ class FreeContent extends Controller {
 	}
 
 	/**
-	 * the main page of the Free Content Page
+	 * the home page of the Site
 	 *
 	 * @access public
-	 * @param  string $sPage free content we want sho
+	 * @param  int $iCategory
 	 * @return void
 	 */
 
-	public function index($sPage) {
+	public function index($iCategory) {
 
 		$this->_loadLayout();
 		
+		$oCategory = new ModelCategory;
+		
+		$aCategories = $oCategory->getAllCategoriesInOrder($iCategory, true);
+		
+		$aAttributesCategories = array();
+		
+		foreach ($aCategories as $oCategory) {
+		
+			$oAttributeCategory = new AttributeCategory;
+		
+			$aAttributesCategories[$oCategory->get_id()] = array();
+			$aAttributesCategories[$oCategory->get_id()]['attributes'] = $oAttributeCategory->getAttributesValuesForOneCategory($oCategory->get_id());
+			$aAttributesCategories[$oCategory->get_id()]['name'] = $oCategory->get_name();
+		}
+
 		$this->layout
-			 ->assign('model', '/src/Helium/View/PageFree/'.$sPage.'.tpl')
+			 ->assign('attributes_categories', $aAttributesCategories)
 			 ->display();
 	}
 }

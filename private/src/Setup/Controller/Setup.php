@@ -16,6 +16,9 @@
 
 namespace Venus\src\Setup\Controller;
 
+use \Venus\src\Helium\Entity\attribute as Attribute;
+use \Venus\src\Helium\Entity\attribute_category as AttributeCategory;
+use \Venus\src\Helium\Entity\attribute_value as AttributeValue;
 use \Venus\src\Helium\Entity\category as Category;
 use \Venus\src\Helium\Entity\country as Country;
 use \Venus\src\Helium\Entity\merchant as Merchant;
@@ -193,8 +196,7 @@ class Setup extends Controller {
 			
 			$oRight = new Right;
 			
-			$oRight->set_id(1)
-				   ->set_name('Access Setup')
+			$oRight->set_name('Access Setup')
 				   ->set_description('Give access at the user at the Setup Manager')
 				   ->save();
 			
@@ -206,8 +208,7 @@ class Setup extends Controller {
 			
 			$oRight = new Right;
 			
-			$oRight->set_id(2)
-				   ->set_name('Access Merchant')
+			$oRight->set_name('Access Merchant')
 				   ->set_description('Give access at the user at the Merchant Manager')
 				   ->save();
 			
@@ -219,8 +220,7 @@ class Setup extends Controller {
 			
 			$oRight = new Right;
 			
-			$oRight->set_id(3)
-				   ->set_name('Access Brand')
+			$oRight->set_name('Access Brand')
 				   ->set_description('Give access at the user at the Brand Manager')
 				   ->save();
 			
@@ -232,8 +232,7 @@ class Setup extends Controller {
 			
 			$oRight = new Right;
 			
-			$oRight->set_id(4)
-				   ->set_name('Access Product')
+			$oRight->set_name('Access Product')
 				   ->set_description('Give access at the user at the Product Manager')
 				   ->save();
 			
@@ -245,8 +244,7 @@ class Setup extends Controller {
 			
 			$oRight = new Right;
 			
-			$oRight->set_id(5)
-				   ->set_name('Access Offer')
+			$oRight->set_name('Access Offer')
 				   ->set_description('Give access at the user at the Offer Manager')
 				   ->save();
 			
@@ -258,8 +256,7 @@ class Setup extends Controller {
 			
 			$oRight = new Right;
 			
-			$oRight->set_id(6)
-				   ->set_name('Access Vat')
+			$oRight->set_name('Access Vat')
 				   ->set_description('Give access at the user at the Vat Manager')
 				   ->save();
 			
@@ -271,32 +268,29 @@ class Setup extends Controller {
 			
 			$oRight = new Right;
 			
-			$oRight->set_id(7)
-				   ->set_name('Access User')
+			$oRight->set_name('Access User')
 				   ->set_description('Give access at the user at the User Manager')
 				   ->save();
 			
 			$oUserRight = new UserRight;
 			
-			$oUserRight->set_id_user($iIdUser)
-				   	   ->set_id_right(7)
+			$oUserRight->set_id_right(7)
 				   	   ->save();
 			
 			$oRight = new Right;
 			
-			$oRight->set_id(8)
-				   ->set_name('Access Country')
+			$oRight->set_name('Access Country')
 				   ->set_description('Give access at the user at the Country Manager')
 				   ->save();
 			
 			$oUserRight = new UserRight;
 			
-			$oUserRight->set_id_user($iIdUser)
-				   	   ->set_id_right(8)
+			$oUserRight->set_id_right(8)
 				   	   ->save();
 			
-			$oRight->set_id(9)
-				   ->set_name('Access Categories')
+			$oRight = new Right;
+			
+			$oRight->set_name('Access Categories')
 				   ->set_description('Give access at the user at the Categories Manager')
 				   ->save();
 			
@@ -304,6 +298,18 @@ class Setup extends Controller {
 			
 			$oUserRight->set_id_user($iIdUser)
 				   	   ->set_id_right(9)
+				   	   ->save();
+			
+			$oRight = new Right;
+			
+			$oRight->set_name('Access Attributes')
+				   ->set_description('Give access at the user at the Attributes Manager')
+				   ->save();
+			
+			$oUserRight = new UserRight;
+			
+			$oUserRight->set_id_user($iIdUser)
+				   	   ->set_id_right(10)
 				   	   ->save();
 			
 			$oCategory = new Category;
@@ -603,13 +609,13 @@ class Setup extends Controller {
 			
 			$oCategory = new Category;
 			
-			$oCategory->set_enable(1)
-					  ->set_id_category(3)
-					  ->set_name('TV & Home Cinéma')
-					  ->set_visible(1)
-					  ->set_order(3)
-					  ->set_section(1)
-					  ->save();
+			$iTvHomeCinemaIdCategory = $oCategory->set_enable(1)
+					  				   			 ->set_id_category(3)
+					  				   			 ->set_name('TV & Home Cinéma')
+					  				   			 ->set_visible(1)
+					  				   			 ->set_order(3)
+					  				   			 ->set_section(1)
+					  				   			 ->save();
 			
 			$oCategory = new Category;
 			
@@ -1261,6 +1267,167 @@ class Setup extends Controller {
 					  ->set_contact_zip('93400')
 					  ->set_contact_email('helium@gmail.com')
 					  ->save();
+			
+			$oCategory = new Category;
+				
+			$iTvIdCategory = $oCategory->set_enable(1)
+					  				   ->set_id_category($iTvHomeCinemaIdCategory)
+					  				   ->set_name('TV')
+					  				   ->set_visible(1)
+					  				   ->set_order(4)
+					  				   ->set_section(1)
+					  				   ->save();
+			
+			$oAttribute = new Attribute;
+			
+			$iAttributeId = $oAttribute->set_name('les tailles')
+					   				   ->set_type('predefined')
+					   				   ->save();
+			
+			$oAttributeValue = new AttributeValue;
+			
+			$oAttributeValue->set_id_attribute($iAttributeId)
+							->set_value('Moins de 30"')
+							->save();
+			
+			$oAttributeValue = new AttributeValue;
+			
+			$oAttributeValue->set_id_attribute($iAttributeId)
+							->set_value('De 31" à 45"')
+							->save();
+			
+			$oAttributeValue = new AttributeValue;
+			
+			$oAttributeValue->set_id_attribute($iAttributeId)
+							->set_value('De 46" à 55"')
+							->save();
+			
+			$oAttributeValue = new AttributeValue;
+			
+			$oAttributeValue->set_id_attribute($iAttributeId)
+							->set_value('56" et plus')
+							->save();
+			
+			$oAttributeCategory = new AttributeCategory;
+			
+			$oAttributeCategory->set_id_attribute($iAttributeId)
+							   ->set_id_category($iTvIdCategory)
+							   ->save();
+			
+			$oCategory = new Category;
+				
+			$iTvIdCategory = $oCategory->set_enable(1)
+					  				   ->set_id_category($iTvHomeCinemaIdCategory)
+					  				   ->set_name('Barres de son par prix')
+					  				   ->set_visible(1)
+					  				   ->set_order(4)
+					  				   ->set_section(1)
+					  				   ->save();
+			
+			$oAttribute = new Attribute;
+			
+			$iAttributeId = $oAttribute->set_name('les barres de son')
+					   				   ->set_type('predefined')
+					   				   ->save();
+			
+			$oAttributeValue = new AttributeValue;
+			
+			$oAttributeValue->set_id_attribute($iAttributeId)
+							->set_value('Moins de 100€')
+							->save();
+			
+			$oAttributeValue = new AttributeValue;
+			
+			$oAttributeValue->set_id_attribute($iAttributeId)
+							->set_value('Entre 100€ et 200€')
+							->save();
+			
+			$oAttributeValue = new AttributeValue;
+			
+			$oAttributeValue->set_id_attribute($iAttributeId)
+							->set_value('Entre 200€ et 500€')
+							->save();
+			
+			$oAttributeValue = new AttributeValue;
+			
+			$oAttributeValue->set_id_attribute($iAttributeId)
+							->set_value('500€ et plus')
+							->save();
+			
+			$oAttributeCategory = new AttributeCategory;
+			
+			$oAttributeCategory->set_id_attribute($iAttributeId)
+							   ->set_id_category($iTvIdCategory)
+							   ->save();
+			
+			$oCategory = new Category;
+				
+			$iTvIdCategory = $oCategory->set_enable(1)
+					  				   ->set_id_category($iTvHomeCinemaIdCategory)
+					  				   ->set_name('Home cinéma par technologie')
+					  				   ->set_visible(1)
+					  				   ->set_order(4)
+					  				   ->set_section(1)
+					  				   ->save();
+			
+			$oAttribute = new Attribute;
+			
+			$iAttributeId = $oAttribute->set_name('les systèmes')
+					   				   ->set_type('predefined')
+					   				   ->save();
+			
+			$oAttributeValue = new AttributeValue;
+			
+			$oAttributeValue->set_id_attribute($iAttributeId)
+							->set_value('Home cinéma 2.1')
+							->save();
+			
+			$oAttributeValue = new AttributeValue;
+			
+			$oAttributeValue->set_id_attribute($iAttributeId)
+							->set_value('Home cinéma 5.1')
+							->save();
+			
+			$oAttributeCategory = new AttributeCategory;
+			
+			$oAttributeCategory->set_id_attribute($iAttributeId)
+							   ->set_id_category($iTvIdCategory)
+							   ->save();
+			
+			$oCategory = new Category;
+				
+			$iTvIdCategory = $oCategory->set_enable(1)
+					  				   ->set_id_category($iTvHomeCinemaIdCategory)
+					  				   ->set_name('Home cinéma par fonction')
+					  				   ->set_visible(1)
+					  				   ->set_order(4)
+					  				   ->set_section(1)
+					  				   ->save();
+			
+			$oAttribute = new Attribute;
+			
+			$iAttributeId = $oAttribute->set_name('les fonctions')
+					   				   ->set_type('predefined')
+					   				   ->save();
+			
+			$oAttributeValue = new AttributeValue;
+			
+			$oAttributeValue->set_id_attribute($iAttributeId)
+							->set_value('Home cinéma avec lecteur DVD')
+							->save();
+			
+			$oAttributeValue = new AttributeValue;
+			
+			$oAttributeValue->set_id_attribute($iAttributeId)
+							->set_value('Home cinéma avec lecteur Blu-ray')
+							->save();
+			
+			$oAttributeCategory = new AttributeCategory;
+			
+			$oAttributeCategory->set_id_attribute($iAttributeId)
+							   ->set_id_category($iTvIdCategory)
+							   ->save();
+			
 		}
 		else {
 			

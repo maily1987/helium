@@ -4,7 +4,7 @@
     <hr class="forh1">
     <div class="cadre_tier">
         <img src="/img/category/tv-et-home-cinema.jpg"/><br/>
-        TV et Home Cinéma
+        <a href="{url alias='tv-homecinema-barresdeson'}">TV et Home Cinéma</a>
         <ul>
             <li>TV, Accessoires TV
             <li>Home cinéma, Lecteurs Blu-ray

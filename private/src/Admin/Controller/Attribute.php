@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Controller to Categories
+ * Controller to Attribute
  *
  * @category  	src
  * @package   	src\Admin\Controller
@@ -17,10 +17,11 @@
 namespace Venus\src\Admin\Controller;
 
 use \Venus\src\Admin\common\Controller as Controller;
-use \Venus\src\Helium\Model\category as Category;
+use \Venus\src\Helium\Model\attribute_category as AttributeCategory;
+use \Venus\src\Helium\Model\category as ModelCategory;
 
 /**
- * Controller to Categories
+ * Controller to Attribute
  *
  * @category  	src
  * @package   	src\Admin\Controller
@@ -33,7 +34,7 @@ use \Venus\src\Helium\Model\category as Category;
  * @since     	1.0
  */
 
-class Categories extends Controller {
+class Attribute extends Controller {
 
 	/**
 	 * Constructor
@@ -56,24 +57,23 @@ class Categories extends Controller {
 
 	public function index() {
 
-		$this->_checkRight(9);
+		$this->_checkRight(10);
 
-		if (isset($_GET) && isset($_GET['remove'])) {
-
-			$oCategory = new Category;
-			$oCategoryEntity = $oCategory->findOneByid($_GET['remove']);
-			$oCategoryEntity->remove();
+		$oCategory = new ModelCategory;
+		
+		$aCategories = $oCategory->getAllCategoriesInOrder($iCategory, true);
+		
+		$aAttributesCategories = array();
+		
+		foreach ($aCategories as $oCategory) {
+		
+			$oAttributeCategory = new AttributeCategory;
+		
+			$aAttributesCategories[$oCategory->get_id()] = array();
+			$aAttributesCategories[$oCategory->get_id()]['attributes'] = $oAttributeCategory->getAttributesValuesForOneCategory();
+			$aAttributesCategories[$oCategory->get_id()]['name'] = $oCategory->get_name();
 		}
 		
-		$oCategory = new Category;
-		$aCategories = $oCategory->getAllCategoriesInOrder(0);
-		
-		foreach ($aCategories as $iKey => $aOneCategorie) {
-
-			$oCategory = new Category;
-			$aCategories[$iKey]->sub_menu = $oCategory->getAllCategoriesInOrder($aOneCategorie->get_id());
-		}
-
 		$this->layout
 			 ->assign('categories', $aCategories)
 			 ->display();
@@ -88,15 +88,15 @@ class Categories extends Controller {
 
 	public function add() {
 
-		$this->_checkRight(9);
+		$this->_checkRight(10);
 		
-		$oCategory = new Category;
+		$oCategory = new ModelCategory;
 		$aCategories = $oCategory->findAll();
 		$aFinalCategories = array('0' => '--None--');
 		
 		foreach ($aCategories as $aOneCategorie) {
 		 
-			$oCategory = new Category;
+			$oCategory = new ModelCategory;
 			$aFinalCategories[$aOneCategorie->get_id()] = $aOneCategorie->get_name();
 		}
 		
@@ -118,7 +118,7 @@ class Categories extends Controller {
 
 		$this->layout
 			 ->assign('form', $sForm)
-			 ->assign('model', '/src/Admin/View/CategoriesAdd.tpl')
+			 ->assign('model', '/src/Admin/View/AttributeAdd.tpl')
 			 ->display();
 	}
 
@@ -131,9 +131,9 @@ class Categories extends Controller {
 
 	public function update() {
 
-		$this->_checkRight(9);
+		$this->_checkRight(10);
 		
-		$oCategory = new Category;
+		$oCategory = new ModelCategory;
 		$aCategories = $oCategory->findAll();
 		$aFinalCategories = array('0' => '--None--');
 		
@@ -161,7 +161,7 @@ class Categories extends Controller {
 
 		$this->layout
 			 ->assign('form', $sForm)
-			 ->assign('model', '/src/Admin/View/CategoriesAdd.tpl')
+			 ->assign('model', '/src/Admin/View/AttributesAdd.tpl')
 			 ->display();
 	}
 }

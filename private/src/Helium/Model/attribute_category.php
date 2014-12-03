@@ -33,4 +33,43 @@
 	 */
 	
 	class attribute_category extends Model {
+		
+		/**
+		 * get all attributes values for one category
+		 * 
+		 * @access public
+		 * @param  int $iIdCategory
+		 * @return array
+		 */
+		
+		public function getAttributesValuesForOneCategory($iIdCategory) {
+		
+			$aResult = array();
+
+			$aJoin = [
+				[
+					'type' => 'right',
+					'table' => 'attribute',
+					'as' => 'a',
+					'left_field' => 'a.id',
+					'right_field' => 'ac.id_attribute'
+				],
+				[
+					'type' => 'right',
+					'table' => 'attribute_value',
+					'as' => 'av',
+					'left_field' => 'a.id',
+					'right_field' => 'av.id_attribute'
+				]
+			];
+				
+			$aResult = $this->orm
+				 			->select(array('*'))
+				 			->from($this->_sTableName, 'ac')
+				 			->join($aJoin)
+				 			->where($this->where->whereEqual('ac.id_category', $iIdCategory))
+							->load();
+			
+			return $aResult;
+		}
 	}
