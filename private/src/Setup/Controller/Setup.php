@@ -276,7 +276,8 @@ class Setup extends Controller {
 			
 			$oUserRight = new UserRight;
 			
-			$oUserRight->set_id_right(7)
+			$oUserRight->set_id_user($iIdUser)
+				   	   ->set_id_right(7)
 				   	   ->save();
 			
 			$oRight = new Right;
@@ -287,7 +288,8 @@ class Setup extends Controller {
 			
 			$oUserRight = new UserRight;
 			
-			$oUserRight->set_id_right(8)
+			$oUserRight->set_id_user($iIdUser)
+				   	   ->set_id_right(8)
 				   	   ->save();
 			
 			$oRight = new Right;

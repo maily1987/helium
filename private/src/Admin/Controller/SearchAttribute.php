@@ -17,7 +17,7 @@
 namespace Venus\src\Admin\Controller;
 
 use \Venus\src\Admin\common\Controller as Controller;
-use \Venus\src\Helium\Model\search_attribute as SearchAttribute;
+use \Venus\src\Helium\Model\search_attribute as SearchAttributeModel;
 use \Venus\src\Helium\Model\search_attribute_rule as SearchAttributeRule;
 
 /**
@@ -59,18 +59,31 @@ class SearchAttribute extends Controller {
 
 		$this->_checkRight(11);
 
-		$oSearchAttribute = new SearchAttribute;
+		if (isset($_GET) && isset($_GET['remove'])) {
+
+			$oSearchAttributes = new SearchAttributeModel;
+			$oSearchAttributeEntity = $oSearchAttributes->findOneByid($_GET['remove']);
+			$oSearchAttributeEntity->remove();
+		}
+
+		$oSearchAttribute = new SearchAttributeModel;
 		
-		$aSearchAttributes = $oSearchAttribute->fidnAll();
+		$aSearchAttributes = $oSearchAttribute->findAll();
 
 		$aAttributesRules = array();
+		$i = 0;
 		
 		foreach ($aSearchAttributes as $oOneSearchAttribute) {
 
+			$oSearchAttributeRule = new SearchAttributeRule();
+
+			$aAttributesRules[$i] = $oOneSearchAttribute;
+			$aAttributesRules[$i]->rules = $oSearchAttributeRule->findByid_search_attribute($oOneSearchAttribute->get_id());
+			$i++;
 		}
 		
 		$this->layout
-			 ->assign('search_attribute_rule', $aAttributesRules)
+			 ->assign('search_attributes_rules', $aAttributesRules)
 			 ->display();
 	}
 
