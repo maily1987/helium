@@ -1,10 +1,13 @@
 <div class="left-menu">
-    {foreach from=$attributes_categories item=$category}
-        <b>{$category.name}</b><br/>
-        {foreach from=$category.attributes item=$one_attribute_category}
-            &nbsp;&nbsp;{$one_attribute_category->attribute_value->get_value()}<br/>
-        {/foreach}
-        &nbsp;&nbsp;<b>Voir toutes {$category.attributes[0]->attribute->get_name()}</b><br/><br/>
+    {foreach from=$search_attributes item=$attributes}
+        {if isset($attributes[0])}
+            <b>{$attributes[0]->get_name()}</b><br/>
+            {foreach from=$attributes item=$one_attribute_category}
+                &nbsp;&nbsp;{$one_attribute_category->search_attribute_rule->get_name()}<br/>
+            {/foreach}
+            {assign var=sLabelForAll value=$attributes[0]->get_label_for_all()}
+            {if !empty($sLabelForAll)}&nbsp;&nbsp;<b>&gt; {$attributes[0]->get_label_for_all()}</b><br/>{/if}<br/>
+        {/if}
     {/foreach}
     <hr/>
     Afficher les résultats pour

@@ -17,7 +17,7 @@
 namespace Venus\src\Helium\Controller;
 
 use \Venus\src\Helium\common\Controller as Controller;
-use \Venus\src\Helium\Model\attribute_category as AttributeCategory;
+use \Venus\src\Helium\Model\search_attribute as SearchAttribute;
 use \Venus\src\Helium\Model\category as ModelCategory;
 
 /**
@@ -68,15 +68,40 @@ class Category extends Controller {
 		
 		foreach ($aCategories as $oCategory) {
 		
-			$oAttributeCategory = new AttributeCategory;
+			$oSubCategory = new ModelCategory;
+			
+			$aSubCategories = $oSubCategory->getAllCategoriesInOrder($oCategory->get_id(), true);
 		
-			$aAttributesCategories[$oCategory->get_id()] = array();
-			$aAttributesCategories[$oCategory->get_id()]['attributes'] = $oAttributeCategory->getAttributesValuesForOneCategory($oCategory->get_id());
-			$aAttributesCategories[$oCategory->get_id()]['name'] = $oCategory->get_name();
+			foreach ($aSubCategories as $oSubCategory) {
+
+				$oSearchAttribute = new SearchAttribute;
+				
+				$aSearchAttributes = $oSearchAttribute->findByid_category($oSubCategory->get_id());
+				
+				foreach ($aSearchAttributes as $oOneSearchAttributes) {
+
+					$oSearchAttribute = new SearchAttribute;
+					
+					$aAttributesCategories[] = $oSearchAttribute->getSearchAttributesRulesForOneSearchAttribute($oOneSearchAttributes->get_id());
+					
+				}
+			}
+
+			$oSearchAttribute = new SearchAttribute;
+			
+			$aSearchAttributes = $oSearchAttribute->findByid_category($oCategory->get_id());
+			
+			foreach ($aSearchAttributes as $oOneSearchAttributes) {
+			
+				$oSearchAttribute = new SearchAttribute;
+					
+				$aAttributesCategories[] = $oSearchAttribute->getSearchAttributesRulesForOneSearchAttribute($oOneSearchAttributes->get_id());
+					
+			}
 		}
 
 		$this->layout
-			 ->assign('attributes_categories', $aAttributesCategories)
+			 ->assign('search_attributes', $aAttributesCategories)
 			 ->display();
 	}
 }

@@ -26,6 +26,8 @@ use \Venus\src\Helium\Entity\right as Right;
 use \Venus\src\Helium\Entity\user as User;
 use \Venus\src\Helium\Entity\vat as Vat;
 use \Venus\src\Helium\Entity\user_right as UserRight;
+use \Venus\src\Helium\Entity\search_attribute as SearchAttribute;
+use \Venus\src\Helium\Entity\search_attribute_rule as SearchAttributeRule;
 use \Venus\src\Setup\common\Controller as Controller;
 
 /**
@@ -310,6 +312,18 @@ class Setup extends Controller {
 			
 			$oUserRight->set_id_user($iIdUser)
 				   	   ->set_id_right(10)
+				   	   ->save();
+			
+			$oRight = new Right;
+			
+			$oRight->set_name('Access Search Attributes')
+				   ->set_description('Give access at the user at the search Attributes Manager')
+				   ->save();
+			
+			$oUserRight = new UserRight;
+			
+			$oUserRight->set_id_user($iIdUser)
+				   	   ->set_id_right(11)
 				   	   ->save();
 			
 			$oCategory = new Category;
@@ -619,13 +633,13 @@ class Setup extends Controller {
 			
 			$oCategory = new Category;
 			
-			$oCategory->set_enable(1)
-					  ->set_id_category(3)
-					  ->set_name('Audio & Hifi')
-					  ->set_visible(1)
-					  ->set_order(4)
-					  ->set_section(1)
-					  ->save();
+			$iAudioAndHifiCategory = $oCategory->set_enable(1)
+					  						   ->set_id_category(3)
+					  						   ->set_name('Audio & Hifi')
+					  						   ->set_visible(1)
+					  						   ->set_order(4)
+					  						   ->set_section(1)
+					  						   ->save();
 			
 			$oCategory = new Category;
 			
@@ -1272,7 +1286,7 @@ class Setup extends Controller {
 				
 			$iTvIdCategory = $oCategory->set_enable(1)
 					  				   ->set_id_category($iTvHomeCinemaIdCategory)
-					  				   ->set_name('TV')
+					  				   ->set_name('Téléviseurs')
 					  				   ->set_visible(1)
 					  				   ->set_order(4)
 					  				   ->set_section(1)
@@ -1280,153 +1294,277 @@ class Setup extends Controller {
 			
 			$oAttribute = new Attribute;
 			
-			$iAttributeId = $oAttribute->set_name('les tailles')
+			$iAttributeId = $oAttribute->set_name('Taille de l\'écran')
 					   				   ->set_type('predefined')
 					   				   ->save();
 			
 			$oAttributeValue = new AttributeValue;
 			
 			$oAttributeValue->set_id_attribute($iAttributeId)
-							->set_value('Moins de 30"')
+							->set_value('7')
 							->save();
 			
 			$oAttributeValue = new AttributeValue;
 			
 			$oAttributeValue->set_id_attribute($iAttributeId)
-							->set_value('De 31" à 45"')
+							->set_value('9')
 							->save();
 			
 			$oAttributeValue = new AttributeValue;
 			
 			$oAttributeValue->set_id_attribute($iAttributeId)
-							->set_value('De 46" à 55"')
+							->set_value('10')
 							->save();
 			
 			$oAttributeValue = new AttributeValue;
 			
 			$oAttributeValue->set_id_attribute($iAttributeId)
-							->set_value('56" et plus')
+							->set_value('19')
 							->save();
 			
-			$oAttributeCategory = new AttributeCategory;
+			$oAttribute = new Attribute;
 			
-			$oAttributeCategory->set_id_attribute($iAttributeId)
-							   ->set_id_category($iTvIdCategory)
-							   ->save();
+			$iAttributeIdHighScreen = $oAttribute->set_name('Taille de l\'écran')
+					   				   			 ->set_type('predefined')
+					   				   			 ->save();
+			
+			$oSearchAttribute = new SearchAttribute;
+			
+			$iIdSearchAttribute = $oSearchAttribute->set_name('TV')
+					   				   	   		   ->set_label_for_all('Toutes les tailles')
+					   				   	   		   ->set_id_category($iTvIdCategory)
+					   				   	   		   ->save();
+
+			$oSearchAttributeRule = new SearchAttributeRule;
+				
+			$oSearchAttributeRule->set_id_search_attribute($iIdSearchAttribute)
+								 ->set_name('Moins de 30"')
+								 ->set_type('attribute')
+								 ->set_id_by_type($iAttributeIdHighScreen)
+								 ->set_value_min(0)
+								 ->set_value_max(30)
+								 ->save();
+
+			$oSearchAttributeRule = new SearchAttributeRule;
+				
+			$oSearchAttributeRule->set_id_search_attribute($iIdSearchAttribute)
+								 ->set_name('De 31" à 45"')
+								 ->set_type('attribute')
+								 ->set_id_by_type($iAttributeId)
+								 ->set_value_min(31)
+								 ->set_value_max(45)
+								 ->save();
+
+			$oSearchAttributeRule = new SearchAttributeRule;
+				
+			$oSearchAttributeRule->set_id_search_attribute($iIdSearchAttribute)
+								 ->set_name('De 46" à 55"')
+								 ->set_type('attribute')
+								 ->set_id_by_type($iAttributeId)
+								 ->set_value_min(46)
+								 ->set_value_max(55)
+								 ->save();
+
+			$oSearchAttributeRule = new SearchAttributeRule;
+				
+			$oSearchAttributeRule->set_id_search_attribute($iIdSearchAttribute)
+								 ->set_name('56" et plus')
+								 ->set_type('attribute')
+								 ->set_id_by_type($iAttributeId)
+								 ->set_value_min(56)
+								 ->set_value_max(1000)
+								 ->save();
+			
+			$oCategory = new Category;
+				
+			$iEnceinteIdCategory = $oCategory->set_enable(1)
+					  				   		 ->set_id_category($iAudioAndHifiCategory)
+					  				   		 ->set_name('Enceintes')
+					  				   		 ->set_visible(1)
+					  				   		 ->set_order(1)
+					  				   		 ->set_section(1)
+					  				   		 ->save();
+			
+			$oCategory = new Category;
+				
+			$iBarresDeSonIdCategory = $oCategory->set_enable(1)
+					  				   		 	->set_id_category($iEnceinteIdCategory)
+					  				   			->set_name('Barres de son')
+					  				   		 	->set_visible(1)
+					  				   		 	->set_order(2)
+					  				   		 	->set_section(1)
+					  				   		 	->save();
+			
+			$oCategory = new Category;
+				
+			$iBarresDeSonIdCategory = $oCategory->set_enable(1)
+					  				   		 	->set_id_category($iTvIdCategory)
+					  				   			->set_name('Barres de son')
+					  				   		 	->set_visible(0)
+					  				   		 	->set_order(1)
+					  				   		 	->set_section(1)
+					  				   		 	->set_id_shortcuts_category($iBarresDeSonIdCategory)
+					  				   		 	->save();
+			
+			$oSearchAttribute = new SearchAttribute;
+			
+			$iIdSearchAttribute = $oSearchAttribute->set_name('Barres de son par prix')
+					   				   	   		   ->set_label_for_all('Toutes les barres de son')
+					   				   	   		   ->set_id_category($iBarresDeSonIdCategory)
+					   				   	   		   ->save();
+
+			$oSearchAttributeRule = new SearchAttributeRule;
+				
+			$oSearchAttributeRule->set_id_search_attribute($iIdSearchAttribute)
+								 ->set_name('Moins de 100€')
+								 ->set_type('offer_field')
+								 ->set_id_by_type('price')
+								 ->set_value_min(0)
+								 ->set_value_max(100)
+								 ->save();
+
+			$oSearchAttributeRule = new SearchAttributeRule;
+				
+			$oSearchAttributeRule->set_id_search_attribute($iIdSearchAttribute)
+								 ->set_name('Entre 100€ et 200€')
+								 ->set_type('offer_field')
+								 ->set_id_by_type('price')
+								 ->set_value_min(100)
+								 ->set_value_max(200)
+								 ->save();
+
+			$oSearchAttributeRule = new SearchAttributeRule;
+				
+			$oSearchAttributeRule->set_id_search_attribute($iIdSearchAttribute)
+								 ->set_name('Entre 200€ et 500€')
+								 ->set_type('offer_field')
+								 ->set_id_by_type('price')
+								 ->set_value_min(200)
+								 ->set_value_max(500)
+								 ->save();
+
+			$oSearchAttributeRule = new SearchAttributeRule;
+				
+			$oSearchAttributeRule->set_id_search_attribute($iIdSearchAttribute)
+								 ->set_name('500€ et plus')
+								 ->set_type('offer_field')
+								 ->set_id_by_type('price')
+								 ->set_value_min(500)
+								 ->set_value_max(9999999)
+								 ->save();
+			
+			$oCategory = new Category;
+				
+			$iHomeCinemaIdCategory = $oCategory->set_enable(1)
+					  				   		   ->set_id_category($iTvIdCategory)
+					  				   		   ->set_name('Ensembles Home Cinéma')
+					  				   		   ->set_visible(1)
+					  				   		   ->set_order(1)
+					  				   		   ->set_section(1)
+					  				   		   ->save();
+			
+			$oSearchAttribute = new SearchAttribute;
+			
+			$iIdSearchAttribute = $oSearchAttribute->set_name('Home cinéma par technologie')
+					   				   	   		   ->set_label_for_all('Tous les systèmes')
+					   				   	   		   ->set_id_category($iHomeCinemaIdCategory)
+					   				   	   		   ->save();
+
+			$oSearchAttributeRule = new SearchAttributeRule;
+				
+			$oSearchAttributeRule->set_id_search_attribute($iIdSearchAttribute)
+								 ->set_name('Home cinéma 2.1')
+								 ->set_type('attribute')
+								 ->set_id_by_type(1)				//@todo remplir après création de l'attribue
+								 ->set_value('Home cinéma 2.1')
+								 ->save();
+
+			$oSearchAttributeRule = new SearchAttributeRule;
+				
+			$oSearchAttributeRule->set_id_search_attribute($iIdSearchAttribute)
+								 ->set_name('Home cinéma 5.1')
+								 ->set_type('attribute')
+								 ->set_id_by_type(1) //@todo remplir après création de l'attribue
+								 ->set_value('Home cinéma 5.1')
+								 ->save();
+			
+			$oSearchAttribute = new SearchAttribute;
+			
+			$iIdSearchAttribute = $oSearchAttribute->set_name('Home cinéma par fonction')
+					   				   	   		   ->set_label_for_all('Toutes les fonctions')
+					   				   	   		   ->set_id_category($iHomeCinemaIdCategory)
+					   				   	   		   ->save();
+
+			$oSearchAttributeRule = new SearchAttributeRule;
+				
+			$oSearchAttributeRule->set_id_search_attribute($iIdSearchAttribute)
+								 ->set_name('Home cinéma avec lecteur DVD')
+								 ->set_type('attribute')
+								 ->set_id_by_type(1) //@todo remplir après création de l'attribue
+								 ->set_value('Home cinéma avec lecteur DVD')
+								 ->save();
+
+			$oSearchAttributeRule = new SearchAttributeRule;
+				
+			$oSearchAttributeRule->set_id_search_attribute($iIdSearchAttribute)
+								 ->set_name('Home cinéma avec lecteur Blu-ray')
+								 ->set_type('attribute')
+								 ->set_id_by_type(1) //@todo remplir après création de l'attribue
+								 ->set_value('Home cinéma avec lecteur Blu-ray')
+								 ->save();
 			
 			$oCategory = new Category;
 				
 			$iTvIdCategory = $oCategory->set_enable(1)
 					  				   ->set_id_category($iTvHomeCinemaIdCategory)
-					  				   ->set_name('Barres de son par prix')
+					  				   ->set_name('Lecteurs et Enregistreurs Blu-ray')
 					  				   ->set_visible(1)
 					  				   ->set_order(4)
 					  				   ->set_section(1)
 					  				   ->save();
 			
-			$oAttribute = new Attribute;
+			$oSearchAttribute = new SearchAttribute;
 			
-			$iAttributeId = $oAttribute->set_name('les barres de son')
-					   				   ->set_type('predefined')
-					   				   ->save();
-			
-			$oAttributeValue = new AttributeValue;
-			
-			$oAttributeValue->set_id_attribute($iAttributeId)
-							->set_value('Moins de 100€')
-							->save();
-			
-			$oAttributeValue = new AttributeValue;
-			
-			$oAttributeValue->set_id_attribute($iAttributeId)
-							->set_value('Entre 100€ et 200€')
-							->save();
-			
-			$oAttributeValue = new AttributeValue;
-			
-			$oAttributeValue->set_id_attribute($iAttributeId)
-							->set_value('Entre 200€ et 500€')
-							->save();
-			
-			$oAttributeValue = new AttributeValue;
-			
-			$oAttributeValue->set_id_attribute($iAttributeId)
-							->set_value('500€ et plus')
-							->save();
-			
-			$oAttributeCategory = new AttributeCategory;
-			
-			$oAttributeCategory->set_id_attribute($iAttributeId)
-							   ->set_id_category($iTvIdCategory)
-							   ->save();
-			
-			$oCategory = new Category;
+			$iIdSearchAttribute = $oSearchAttribute->set_name('Lecteurs enregistreurs Blu-Ray/DVD')
+					   				   	   		   ->set_id_category($iHomeCinemaIdCategory)
+					   				   	   		   ->save();
+
+			$oSearchAttributeRule = new SearchAttributeRule;
 				
-			$iTvIdCategory = $oCategory->set_enable(1)
-					  				   ->set_id_category($iTvHomeCinemaIdCategory)
-					  				   ->set_name('Home cinéma par technologie')
-					  				   ->set_visible(1)
-					  				   ->set_order(4)
-					  				   ->set_section(1)
-					  				   ->save();
-			
-			$oAttribute = new Attribute;
-			
-			$iAttributeId = $oAttribute->set_name('les systèmes')
-					   				   ->set_type('predefined')
-					   				   ->save();
-			
-			$oAttributeValue = new AttributeValue;
-			
-			$oAttributeValue->set_id_attribute($iAttributeId)
-							->set_value('Home cinéma 2.1')
-							->save();
-			
-			$oAttributeValue = new AttributeValue;
-			
-			$oAttributeValue->set_id_attribute($iAttributeId)
-							->set_value('Home cinéma 5.1')
-							->save();
-			
-			$oAttributeCategory = new AttributeCategory;
-			
-			$oAttributeCategory->set_id_attribute($iAttributeId)
-							   ->set_id_category($iTvIdCategory)
-							   ->save();
-			
-			$oCategory = new Category;
+			$oSearchAttributeRule->set_id_search_attribute($iIdSearchAttribute)
+								 ->set_name('Lecteurs 3D')
+								 ->set_type('attribute')
+								 ->set_id_by_type(1) //@todo remplir après création de l'attribue
+								 ->set_value('Lecteurs 3D')
+								 ->save();
+
+			$oSearchAttributeRule = new SearchAttributeRule;
 				
-			$iTvIdCategory = $oCategory->set_enable(1)
-					  				   ->set_id_category($iTvHomeCinemaIdCategory)
-					  				   ->set_name('Home cinéma par fonction')
-					  				   ->set_visible(1)
-					  				   ->set_order(4)
-					  				   ->set_section(1)
-					  				   ->save();
-			
-			$oAttribute = new Attribute;
-			
-			$iAttributeId = $oAttribute->set_name('les fonctions')
-					   				   ->set_type('predefined')
-					   				   ->save();
-			
-			$oAttributeValue = new AttributeValue;
-			
-			$oAttributeValue->set_id_attribute($iAttributeId)
-							->set_value('Home cinéma avec lecteur DVD')
-							->save();
-			
-			$oAttributeValue = new AttributeValue;
-			
-			$oAttributeValue->set_id_attribute($iAttributeId)
-							->set_value('Home cinéma avec lecteur Blu-ray')
-							->save();
-			
-			$oAttributeCategory = new AttributeCategory;
-			
-			$oAttributeCategory->set_id_attribute($iAttributeId)
-							   ->set_id_category($iTvIdCategory)
-							   ->save();
+			$oSearchAttributeRule->set_id_search_attribute($iIdSearchAttribute)
+								 ->set_name('Lecteurs Blu-Ray et enregistreurs')
+								 ->set_type('attribute')
+								 ->set_id_by_type(1) //@todo remplir après création de l'attribue
+								 ->set_value('Lecteurs Blu-Ray et enregistreurs')
+								 ->save();
+
+			$oSearchAttributeRule = new SearchAttributeRule;
+				
+			$oSearchAttributeRule->set_id_search_attribute($iIdSearchAttribute)
+								 ->set_name('Lecteurs DVD et enregistreurs')
+								 ->set_type('attribute')
+								 ->set_id_by_type(1) //@todo remplir après création de l'attribue
+								 ->set_value('Lecteurs DVD et enregistreurs')
+								 ->save();
+
+			$oSearchAttributeRule = new SearchAttributeRule;
+				
+			$oSearchAttributeRule->set_id_search_attribute($iIdSearchAttribute)
+								 ->set_name('Lecteurs DVD portables')
+								 ->set_type('attribute')
+								 ->set_id_by_type(1) //@todo remplir après création de l'attribue
+								 ->set_value('Lecteurs DVD portables')
+								 ->save();
+		
 			
 		}
 		else {
